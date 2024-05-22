@@ -8,14 +8,6 @@ export const mainClass = style({
   justifyContent: "center",
 });
 
-export const formClass = style({
-  width: 500,
-});
-
 export const createAccountClass = style({
   margin: "20px 0",
-});
-
-export const errorClass = style({
-  color: "#ce7e7b",
 });

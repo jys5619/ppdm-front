@@ -10,6 +10,15 @@ export default defineConfig({
       identifiers: ({ hash }) => `prefix_${hash}`,
     }),
   ],
+  resolve: {
+    alias: [
+      { find: "@app", replacement: "/src/app" },
+      { find: "@widgets", replacement: "/src/widgets" },
+      { find: "@shared", replacement: "/src/shared" },
+      { find: "@", replacement: "/src" },
+    ],
+  },
+  base: "/",
   server: {
     proxy: {
       "/api": {

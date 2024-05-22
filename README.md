@@ -37,4 +37,6 @@ npm i react-hook-form @hookform/resolvers zod
 npm i @picocss/pico
 # main.ts -> import '@picocss/pico'
 npm install @vanilla-extract/css
+npm install axios
+npm install zustand --save
 ```
