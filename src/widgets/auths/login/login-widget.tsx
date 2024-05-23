@@ -3,7 +3,8 @@ import { LoginWidgetProps } from "./prop/login-widget.prop";
 import { useLoginWidgetAction } from "./action/login-widget.action";
 
 export function LoginWidget(props: LoginWidgetProps) {
-  const { register, handleSubmit, errors, isSubmitting, onSubmit } = useLoginWidgetAction(props);
+  const { register, handleSubmit, errors, isSubmitting, onSubmit, isRemember } =
+    useLoginWidgetAction(props);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={formClass}>
@@ -15,6 +16,7 @@ export function LoginWidget(props: LoginWidgetProps) {
         placeholder="이메일"
         autoComplete="email"
         disabled={isSubmitting}
+        autoFocus={!isRemember}
       />
       {errors.email && <small className={errorClass}>{errors.email.message}</small>}
       <input
@@ -22,6 +24,7 @@ export function LoginWidget(props: LoginWidgetProps) {
         type="password"
         placeholder="패스워드"
         disabled={isSubmitting}
+        autoFocus={isRemember}
       />
       {errors.password && <small className={errorClass}>{errors.password.message}</small>}
       <fieldset hidden={!props.isShowRememberMe}>

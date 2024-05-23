@@ -1,5 +1,5 @@
-import ErrorPage from "./layout/error-page";
-import Layout from "./layout/layout";
+import ErrorPage from "../../pages/layout/error-page";
+import Layout from "../../pages/layout/layout";
 import { LoginPage } from "../../pages/auths/login/login-page";
 import { Database } from "../../pages/datas/database-page";
 import { MainPage } from "../../pages/main-page";
@@ -7,6 +7,7 @@ import { MyPage } from "../../pages/my/my-page";
 import { DataPage } from "../../pages/datas/data-page";
 import ProtectedRoute from "./protected-route";
 import { CreateAccountPage } from "../../pages/auths/create-account/create-account-page";
+import { SampleUI } from "@/pages/sample/ui/sample-ui";
 
 export const ppdmRouter = [
   {
@@ -41,6 +42,10 @@ export const ppdmRouter = [
             element: <Database />,
           },
         ],
+      },
+      {
+        path: "sample-ui",
+        element: <SampleUI />,
       },
     ],
   },

@@ -36,7 +36,9 @@ npm i @types/react-router-dom react-router-dom
 npm i react-hook-form @hookform/resolvers zod
 npm i @picocss/pico
 # main.ts -> import '@picocss/pico'
-npm install @vanilla-extract/css
-npm install axios
-npm install zustand --save
+npm i @vanilla-extract/css
+npm i axios
+npm i zustand zustand-persist --save
+npm i react-icons --save
+# https://react-icons.github.io/react-icons/
 ```

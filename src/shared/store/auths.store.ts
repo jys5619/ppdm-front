@@ -1,24 +1,37 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type State = {
+  isLoggedIn: boolean;
   token: string;
 };
 
 type Actions = {
-  setToken: (token: string) => void;
-  reset: () => void;
+  login: (token: string) => void;
+  logout: () => void;
 };
 
+type Store = State & Actions;
+
 const initialState: State = {
+  isLoggedIn: false,
   token: "",
 };
 
-export const useAuths = create<State & Actions>()(set => ({
-  ...initialState,
-  setToken: (token: string) => {
-    set({ token: token });
-  },
-  reset: () => {
-    set(initialState);
-  },
-}));
+export const useAuths = create(
+  persist<Store>(
+    set => ({
+      ...initialState,
+      login: (token: string) => {
+        set(() => ({ isLoggedIn: true, token: token }));
+      },
+      logout: () => {
+        set(() => ({ ...initialState }));
+      },
+    }),
+    {
+      name: "auths",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UserInfoVo } from "./user-info.vo";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type State = {
   userInfo: UserInfoVo;
@@ -10,16 +10,36 @@ type Actions = {
   reset: () => void;
 };
 
+type Store = State & Actions;
+
 const initialState: State = {
   userInfo: {},
 };
 
-export const useUserInfo = create<State & Actions>()(set => ({
-  ...initialState,
-  setUserInfo: (userInfo: UserInfoVo) => {
-    set({ userInfo });
-  },
-  reset: () => {
-    set(initialState);
-  },
-}));
+/**
+ * Request요청 올때 기본으로 셋팅되는 값
+ */
+export interface UserInfoVo {
+  id?: string;
+  name?: string;
+  email?: string;
+  roles?: string[];
+}
+
+export const useUserInfo = create(
+  persist<Store>(
+    set => ({
+      ...initialState,
+      setUserInfo: (userInfo: UserInfoVo) => {
+        set(() => ({ userInfo }));
+      },
+      reset: () => {
+        set(initialState);
+      },
+    }),
+    {
+      name: "user-info",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

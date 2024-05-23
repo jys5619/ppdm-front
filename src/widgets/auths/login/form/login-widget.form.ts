@@ -3,6 +3,7 @@ import { z } from "zod";
 import { LoginWidgetProps } from "../prop/login-widget.prop";
 import { zodResolver } from "@hookform/resolvers/zod";
 import constants from "@/shared/contants/constants";
+import { useAppSetting } from "@/shared/store";
 
 const schema = z.object({
   email: z.string().email({ message: "이메일을 올바르게 입력해 주세요" }),
@@ -19,6 +20,9 @@ const schema = z.object({
 export type LoginFormFields = z.infer<typeof schema>;
 
 export function useLoginWidgetForm(props: LoginWidgetProps) {
+  const { userEmail } = useAppSetting();
+  const isRemember = !!userEmail;
+
   const {
     register,
     handleSubmit,
@@ -26,12 +30,14 @@ export function useLoginWidgetForm(props: LoginWidgetProps) {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormFields>({
     defaultValues: {
-      email: props.email,
+      email: props.email || userEmail,
       password: props.password,
-      remember: true,
+      remember: !!userEmail,
     },
     resolver: zodResolver(schema),
   });
 
-  return { register, handleSubmit, setError, errors, isSubmitting };
+  console.log("2::", userEmail);
+
+  return { register, handleSubmit, setError, errors, isSubmitting, isRemember };
 }
