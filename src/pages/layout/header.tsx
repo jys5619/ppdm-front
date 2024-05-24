@@ -1,15 +1,21 @@
-import { useAuths, useMenus, useUserInfo } from "@/shared/store";
-import { Link } from "react-router-dom";
+import { MenuItem, useAuths, useUserInfo } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
-import "./css/header.css";
 import { FaCaretDown } from "react-icons/fa";
+import { useRef } from "react";
 
-export function Header() {
+import "./css/header.css";
+
+interface HeaderProps {
+  menus: MenuItem[];
+  setMainMenu: (mainMenu: MenuItem) => void;
+}
+
+export function Header({ menus, setMainMenu }: HeaderProps) {
   const navigate = useNavigate();
   const auths = useAuths();
   const { userInfo, resetUserInfo } = useUserInfo();
-  // const { theme, setTheme } = useAppSetting();
-  const { menus } = useMenus();
+
+  const main = useRef<MenuItem>({ group: "main", id: "MAIN", url: "/", name: "Main" });
 
   const onLogOut = async () => {
     const ok = confirm("로그아웃 하시겠습니까?");
@@ -20,25 +26,23 @@ export function Header() {
     }
   };
 
-  // const changeTheme = () => {
-  //   console.log("chagne theme", theme);
-  //   setTheme(theme === "dark" ? "light" : "dark");
-  // };
+  const gotoMenu = (menu: MenuItem) => {
+    setMainMenu(menu);
+    navigate(menu.url);
+  };
 
   return (
     <header>
       <nav>
         <div className="top-menu">
-          <div>
-            <Link to={"/"}>Home</Link>
+          <div key={main.current.id} onClick={() => gotoMenu(main.current)}>
+            {main.current.name}
           </div>
           {menus
             .filter(m => m.group === "main")
-            .map(menu => (
-              <div key={menu.id}>
-                <Link to={menu.url}>
-                  <>{menu.name}</>
-                </Link>
+            .map(m => (
+              <div key={m.id} onClick={() => gotoMenu(m)}>
+                {m.name}
               </div>
             ))}
           <div className="slice">

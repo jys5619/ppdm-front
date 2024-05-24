@@ -1,0 +1,37 @@
+/* Main */
+
+main.main-aside-hide {
+  grid-column-start: 1 !important;
+  grid-column-end: 3 !important;
+}
+
+main.main > div {
+  width: 100%;
+  padding: 1rem;
+  flex: 1 0 60%;
+}
+
+main.main > div.content-sub {
+  padding: 10px;
+  border-left: 1px solid #111111;
+  flex: 1 0 40%;
+}
+
+/* Main - Title */
+main.main > div.content-main > .main-title {
+  /* border: 1px solid #111111; */
+  margin-bottom: 10px;
+}
+
+main.main > div.content-main > .main-title > h1 {
+  padding: 5px 16px;
+  font-size: 16px;
+}
+
+main.main > div.content-main > .main-title > h1::before {
+  content: "😀";
+  position: relative;
+  left: -3px;
+  top: -1px;
+}
+/* // Main - Title */

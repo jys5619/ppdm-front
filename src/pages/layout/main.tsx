@@ -1,8 +1,13 @@
 import { Outlet } from "react-router-dom";
+import "./css/main.css";
 
-export function Main() {
+interface MainProp {
+  isAsideHidden: boolean;
+}
+
+export function Main({ isAsideHidden }: MainProp) {
   return (
-    <main>
+    <main className={`main${isAsideHidden ? " main-aside-hide" : ""}`}>
       <Outlet />
     </main>
   );

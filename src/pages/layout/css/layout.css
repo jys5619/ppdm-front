@@ -56,53 +56,18 @@ header {
 
 /*  왼쪽 메뉴 */
 aside {
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
   background: #f4f7f7;
 }
 
-/* 메뉴 숨기기 */
-/* nav > div {
-        display: none;
-    } */
-
-aside .logo {
-  height: 36px;
-  padding: 8px 24px;
-  background: #c9d6de;
-  border-bottom: 1px solid #1f4e5f;
-}
-
-/*  // 왼쪽 메뉴 - 아코디언 */
-/*  // 왼쪽 메뉴 */
-
-/* 탭바 */
-div.tabbar {
+main {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background: #f4f7f7;
+  flex: 1 0 100%;
   display: flex;
-  align-items: flex-end;
-  border-bottom: 1px solid #111111;
-  border-left: 1px solid #1f4e5f;
-}
-
-div.tabbar > span {
-  padding: 6px 10px;
-  border-left: 1px solid #111111;
-  border-right: 1px solid #111111;
-  border-top: 1px solid #111111;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 5px;
-  margin-left: 3px;
-  cursor: pointer;
-}
-
-div.tabbar > span.select {
-  background: rgb(199, 199, 199);
-  font-weight: bold;
-}
-
-div.tabbar > span > span.close {
-  padding-left: 15px;
-  padding-right: 5px;
+  overflow-y: auto;
 }
 
 /* // 탭바 */
@@ -111,44 +76,6 @@ section {
   display: flex;
   border-left: 1px solid #1f4e5f;
 }
-
-/* Main */
-main {
-  flex: 1 0 100%;
-  display: flex;
-  overflow-y: auto;
-  background: #fdfbfb;
-}
-
-main > div.content-main {
-  padding: 10px;
-  flex: 1 0 60%;
-}
-
-main > div.content-sub {
-  padding: 10px;
-  border-left: 1px solid #111111;
-  flex: 1 0 40%;
-}
-
-/* Main - Title */
-main > div.content-main > .main-title {
-  /* border: 1px solid #111111; */
-  margin-bottom: 10px;
-}
-
-main > div.content-main > .main-title > h1 {
-  padding: 5px 16px;
-  font-size: 16px;
-}
-
-main > div.content-main > .main-title > h1::before {
-  content: "😀";
-  position: relative;
-  left: -3px;
-  top: -1px;
-}
-/* // Main - Title */
 
 /* Main - Form */
 .main-form {

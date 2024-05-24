@@ -2,7 +2,7 @@ import ErrorPage from "../../pages/layout/error-page";
 import Layout from "../../pages/layout/layout";
 import { LoginPage } from "../../pages/auths/login/login-page";
 import { Database } from "../../pages/datas/database-page";
-import { MainPage } from "../../pages/main-page";
+import { MainPage } from "../../pages/main/main-page";
 import { MyPage } from "../../pages/my/my-page";
 import { DataPage } from "../../pages/datas/data-page";
 import ProtectedRoute from "./protected-route";
@@ -32,7 +32,7 @@ export const ppdmRouter: RouteObject[] = [
         children: [{ path: "database", element: <Database /> }],
       },
       {
-        path: "datas",
+        path: "data",
         element: <DataPage />,
         children: [
           {

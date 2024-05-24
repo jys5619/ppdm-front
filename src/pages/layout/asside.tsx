@@ -1,37 +1,36 @@
-import { useMenus } from "@/shared/store";
-import { Link } from "react-router-dom";
-import "./css/aside.css";
+import { MenuItem } from "@/shared/store";
+import { useNavigate } from "react-router-dom";
+import { GroupMenu } from "./ui/group-menu";
 
-export function Aside() {
-  const { menus } = useMenus();
-  const sampleMenu = menus.filter(m => m.group === "sample");
-  const sampleUiMenu = menus.filter(m => m.group === "sample-ui");
+import "./css/aside.css";
+import { SubMenu } from "./ui/sub-menu";
+interface AsideProps {
+  groupMenu: MenuItem[];
+  subMenu: MenuItem[];
+}
+
+export function Aside({ groupMenu, subMenu }: AsideProps) {
+  const navigate = useNavigate();
+
+  const gotoMenu = (menu: MenuItem) => {
+    navigate(menu.url);
+  };
 
   return (
     <aside>
-      <div className="logo">
-        <a href="#">UI</a>
-      </div>
       <nav className="accordion-menu">
         <div className="accrodion">
-          {sampleMenu.map(m => (
-            <>
-              <input type="checkbox" id={m.id} />
-              <label htmlFor={m.id}>
-                {m.name}
-                <em></em>
-              </label>
+          {groupMenu.map(m => (
+            <div key={m.id}>
+              <GroupMenu menu={m} key={m.id} />
               <div>
-                {sampleUiMenu.map(sm => (
-                  <label htmlFor={sm.id}>
-                    <input type="radio" name={m.id} id={sm.id} />
-                    <span>
-                      <Link to={sm.url}>{sm.name}</Link>
-                    </span>
-                  </label>
-                ))}
+                {subMenu
+                  .filter(sm => sm.group === m.id)
+                  .map(sm => (
+                    <SubMenu name={m.id} menu={sm} gotoMenu={gotoMenu} key={sm.id} />
+                  ))}
               </div>
-            </>
+            </div>
           ))}
         </div>
       </nav>
