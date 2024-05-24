@@ -6,10 +6,13 @@ import { MainPage } from "../../pages/main-page";
 import { MyPage } from "../../pages/my/my-page";
 import { DataPage } from "../../pages/datas/data-page";
 import ProtectedRoute from "./protected-route";
-import { CreateAccountPage } from "../../pages/auths/create-account/create-account-page";
-import { SampleUI } from "@/pages/sample/ui/sample-ui";
+import Sample from "@/pages/sample/sample";
+import { UI } from "@/pages/sample";
+import { CreateAccountPage } from "@/pages/auths/create-account/create-account-page";
+import { UIButton, UIInput, UILink, UITable, UITypography } from "@/pages/sample/ui";
+import { RouteObject } from "react-router-dom";
 
-export const ppdmRouter = [
+export const ppdmRouter: RouteObject[] = [
   {
     path: "/",
     element: (
@@ -26,12 +29,7 @@ export const ppdmRouter = [
       {
         path: "my",
         element: <MyPage />,
-        children: [
-          {
-            path: "database",
-            element: <Database />,
-          },
-        ],
+        children: [{ path: "database", element: <Database /> }],
       },
       {
         path: "datas",
@@ -44,8 +42,40 @@ export const ppdmRouter = [
         ],
       },
       {
-        path: "sample-ui",
-        element: <SampleUI />,
+        path: "sample",
+        element: <Sample />,
+        children: [
+          {
+            path: "ui",
+            element: <UI />,
+            children: [
+              {
+                path: "",
+                element: <UITypography />,
+              },
+              {
+                path: "typography",
+                element: <UITypography />,
+              },
+              {
+                path: "link",
+                element: <UILink />,
+              },
+              {
+                path: "button",
+                element: <UIButton />,
+              },
+              {
+                path: "table",
+                element: <UITable />,
+              },
+              {
+                path: "input",
+                element: <UIInput />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

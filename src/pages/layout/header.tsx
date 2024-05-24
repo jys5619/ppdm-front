@@ -1,91 +1,67 @@
-import { useAppSetting, useUserInfo } from "@/shared/store";
-import { IoSettingsOutline } from "react-icons/io5";
+import { useAuths, useMenus, useUserInfo } from "@/shared/store";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./css/header.css";
+import { FaCaretDown } from "react-icons/fa";
 
 export function Header() {
   const navigate = useNavigate();
-  const { userInfo } = useUserInfo();
-  const { theme, setTheme } = useAppSetting();
-
-  const menus = {
-    main: [
-      {
-        id: "mydatabase",
-        url: `/my/database`,
-        name: "Database",
-      },
-      {
-        id: "database",
-        url: `/datas/database`,
-        name: "Database",
-      },
-      {
-        id: "sampleUI",
-        url: `sample-ui`,
-        name: "Sample U1",
-      },
-    ],
-  };
+  const auths = useAuths();
+  const { userInfo, resetUserInfo } = useUserInfo();
+  // const { theme, setTheme } = useAppSetting();
+  const { menus } = useMenus();
 
   const onLogOut = async () => {
-    const ok = confirm("Are you sure you want to log out?");
+    const ok = confirm("로그아웃 하시겠습니까?");
     if (ok) {
-      // await auth.signOut();
+      resetUserInfo();
+      auths.logout();
       navigate("/login");
     }
   };
 
-  const changeTheme = () => {
-    console.log("chagne theme", theme);
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  // const changeTheme = () => {
+  //   console.log("chagne theme", theme);
+  //   setTheme(theme === "dark" ? "light" : "dark");
+  // };
+
   return (
     <header>
-      <div id="sidebar">
-        <nav>
-          <ul>
-            <li style={{ marginLeft: "50px", fontSize: "20px" }}>
-              <Link to={"/"}>Home</Link>
-            </li>
-            {menus.main.map(menu => (
-              <li key={menu.id}>
+      <nav>
+        <div className="top-menu">
+          <div>
+            <Link to={"/"}>Home</Link>
+          </div>
+          {menus
+            .filter(m => m.group === "main")
+            .map(menu => (
+              <div key={menu.id}>
                 <Link to={menu.url}>
                   <>{menu.name}</>
                 </Link>
-              </li>
+              </div>
             ))}
-          </ul>
-          <ul>
-            <li>
-              <details className="dropdown">
-                <summary>
-                  {userInfo.name}({userInfo.email})
-                </summary>
-                <ul dir="rtl">
-                  <li>
-                    <a href="#">Profile</a>
-                  </li>
-                  <li>
-                    <a href="#">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#">Security</a>
-                  </li>
-                  <li>
-                    <button onClick={onLogOut}>Logout</button>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <button onClick={changeTheme}>
-                <IoSettingsOutline />
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+          <div className="slice">
+            <a href="#">&nbsp;</a>
+          </div>
+          <div className="comboMenu">
+            <div>
+              <label htmlFor="mainComboMenuList">
+                {userInfo.name}({userInfo.email}) <FaCaretDown />
+              </label>
+            </div>
+            <input type="checkbox" id="mainComboMenuList"></input>
+            <div className="comboList">
+              <label htmlFor="mainComboMenuList">
+                <div>사용자정보</div>
+                <div>설정</div>
+                <div>화면잠금</div>
+                <div onClick={onLogOut}>로그아웃 </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

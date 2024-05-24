@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ppdmRouter } from "./app/routes/ppdm-router";
-import "@picocss/pico";
+
+// import "@picocss/pico";
 
 const router = createBrowserRouter(ppdmRouter);
 

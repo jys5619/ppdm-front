@@ -1,0 +1,59 @@
+header .top-menu {
+  /* position: absolute; */
+  /* bottom: 0; */
+  background: #c9d6de;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+header .top-menu div {
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding: 8px 24px;
+}
+
+header .top-menu div.slice {
+  flex-grow: 1;
+}
+
+header .top-menu div a {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.comboMenu {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.comboMenu > div > label {
+  cursor: pointer;
+}
+
+.comboMenu > input[type="checkbox"] {
+  display: none;
+}
+
+.comboMenu > div.comboList {
+  padding: 0 !important;
+  margin: 0 !important;
+  position: absolute;
+  right: 10px;
+  opacity: 1;
+  top: 37px;
+  background-color: white;
+  border: 1px solid black;
+}
+.comboMenu > div.comboList > div {
+  cursor: pointer;
+}
+
+.comboMenu > input[type="checkbox"] + div.comboList {
+  display: none;
+}
+
+.comboMenu > input[type="checkbox"]:checked + div.comboList {
+  display: block;
+}

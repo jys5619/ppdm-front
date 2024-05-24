@@ -1,11 +1,10 @@
 import { SubmitHandler } from "react-hook-form";
 import { LoginFormFields, useLoginWidgetForm } from "../form/login-widget.form";
 import { LoginWidgetProps } from "../prop/login-widget.prop";
-import { useAppSetting, useAuths } from "@/shared/store";
+import { useAppSetting, useAuths, useMenus } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "@/shared/store/user-info.store";
 import { login } from "../api/login-widget.api";
-// import { useEffect, useRef } from "react";
 
 export function useLoginWidgetAction(props: LoginWidgetProps) {
   const { register, handleSubmit, setError, errors, isSubmitting, isRemember } =
@@ -14,33 +13,19 @@ export function useLoginWidgetAction(props: LoginWidgetProps) {
   const { setUserEmail } = useAppSetting();
   const { setUserInfo } = useUserInfo();
   const navigate = useNavigate();
-
-  // const emailInput = useRef<HTMLInputElement>(null);
-  // const passwordInput = useRef<HTMLInputElement>(null);
-
-  /**
-   * Input Focus 처리
-   */
-  // useEffect(() => {
-  //   if (!isRemember && emailInput.current) {
-  //     emailInput.current.focus();
-  //   } else if (isRemember && passwordInput.current) {
-  //     passwordInput.current.focus();
-  //   }
-  // }, [isRemember]);
+  const { setMenus } = useMenus();
 
   const onSubmit: SubmitHandler<LoginFormFields> = async formData => {
     try {
       const {
-        data: { access_token, user },
+        data: { access_token, user, menus },
       } = await login(formData);
-
-      console.log("LOGIN", formData);
 
       if (formData.remember !== undefined && formData.remember !== null) {
         setUserEmail(formData.remember ? formData.email : "");
       }
       setUserInfo(user);
+      setMenus(menus);
       auths.login(access_token);
       navigate("/");
     } catch (e) {

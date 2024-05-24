@@ -1,7 +1,210 @@
-.bg-light {
-  background: #ffffff;
+* {
+  box-sizing: border-box;
+  color: #1e2022;
+  /*: 13px "Gothiche", "Gothiche", 고딕체, Gothiche, sans-serif; */
+  font-family: "Gothic", "Gothic", 고딕, Gothic, sans-serif;
+  font-size: 14px;
+}
+body,
+div,
+span,
+nav,
+main,
+footer,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
 }
 
-.bg-dark {
-  background: #13171f;
+body {
+  overflow-y: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+select,
+input {
+  width: 100%;
+  border: 1px solid #9e9e9e;
+  height: 24px;
+}
+.container {
+  display: grid;
+  grid-template-rows: 36px auto;
+  grid-template-columns: 300px auto; /* 메뉴 숨기기 : 300px auto; 0 auto */
+  background-color: #ffffff;
+  /* padding: 10px; */
+  height: 100dvh;
+  gap: 1px;
+  background-color: #111111;
+}
+
+/* 헤더 */
+header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*  왼쪽 메뉴 */
+aside {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  background: #f4f7f7;
+}
+
+/* 메뉴 숨기기 */
+/* nav > div {
+        display: none;
+    } */
+
+aside .logo {
+  height: 36px;
+  padding: 8px 24px;
+  background: #c9d6de;
+  border-bottom: 1px solid #1f4e5f;
+}
+
+/*  // 왼쪽 메뉴 - 아코디언 */
+/*  // 왼쪽 메뉴 */
+
+/* 탭바 */
+div.tabbar {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid #111111;
+  border-left: 1px solid #1f4e5f;
+}
+
+div.tabbar > span {
+  padding: 6px 10px;
+  border-left: 1px solid #111111;
+  border-right: 1px solid #111111;
+  border-top: 1px solid #111111;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+div.tabbar > span.select {
+  background: rgb(199, 199, 199);
+  font-weight: bold;
+}
+
+div.tabbar > span > span.close {
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+/* // 탭바 */
+
+section {
+  display: flex;
+  border-left: 1px solid #1f4e5f;
+}
+
+/* Main */
+main {
+  flex: 1 0 100%;
+  display: flex;
+  overflow-y: auto;
+  background: #fdfbfb;
+}
+
+main > div.content-main {
+  padding: 10px;
+  flex: 1 0 60%;
+}
+
+main > div.content-sub {
+  padding: 10px;
+  border-left: 1px solid #111111;
+  flex: 1 0 40%;
+}
+
+/* Main - Title */
+main > div.content-main > .main-title {
+  /* border: 1px solid #111111; */
+  margin-bottom: 10px;
+}
+
+main > div.content-main > .main-title > h1 {
+  padding: 5px 16px;
+  font-size: 16px;
+}
+
+main > div.content-main > .main-title > h1::before {
+  content: "😀";
+  position: relative;
+  left: -3px;
+  top: -1px;
+}
+/* // Main - Title */
+
+/* Main - Form */
+.main-form {
+  border: 1px solid #9e9e9e;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  padding: 5px;
+  background: white;
+}
+
+form.col-4 > .form-row {
+  display: flex;
+  gap: 1px;
+  border: 1px solid #9e9e9e;
+  background: #9e9e9e;
+}
+
+form.col-4 > .form-row > div {
+  padding: 2px;
+}
+
+form.col-4 > .form-row > div:nth-child(odd) {
+  flex-basis: 150px;
+  flex-grow: 0;
+  font-weight: 600;
+  background: #e0dddd;
+  padding: 4px 10px 0 10px;
+  text-align: right;
+}
+
+form.col-4 > .form-row > div:nth-child(even) {
+  flex-grow: 1;
+  flex-basis: 200px;
+  background: #fff;
+}
+/* // Main - Form */
+
+.main-grid {
+  border: 1px solid #9e9e9e;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  padding: 5px;
+  background: white;
+}
+/* // Main */
+
+.cell {
+  background: yellow;
+}
+.redNumberCell {
+  text-align: right;
+  color: red;
+  background-color: gainsboro;
+}
+.blueNumberCell {
+  text-align: right;
+  color: blue;
+  background-color: aliceblue;
 }

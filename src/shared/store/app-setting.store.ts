@@ -11,7 +11,7 @@ type State = {
 type Actions = {
   setTheme: (theme: ThemeType) => void;
   setUserEmail: (email: string) => void;
-  reset: () => void;
+  resetAppSetting: () => void;
 };
 
 type Store = State & Actions;
@@ -31,7 +31,7 @@ export const useAppSetting = create(
       setUserEmail: (email: string) => {
         set(() => ({ userEmail: email }));
       },
-      reset: () => {
+      resetAppSetting: () => {
         set(initialState);
       },
     }),

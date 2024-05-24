@@ -7,7 +7,7 @@ type State = {
 
 type Actions = {
   setUserInfo: (user: UserInfoVo) => void;
-  reset: () => void;
+  resetUserInfo: () => void;
 };
 
 type Store = State & Actions;
@@ -33,7 +33,7 @@ export const useUserInfo = create(
       setUserInfo: (userInfo: UserInfoVo) => {
         set(() => ({ userInfo }));
       },
-      reset: () => {
+      resetUserInfo: () => {
         set(initialState);
       },
     }),

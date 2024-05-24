@@ -1,4 +1,4 @@
-export function SampleUI() {
+export function UITable() {
   return (
     <div>
       <h1>Heading 1</h1>
