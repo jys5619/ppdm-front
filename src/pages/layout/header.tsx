@@ -1,12 +1,11 @@
-import { MenuItem, useAuths, useUserInfo } from "@/shared/store";
+import { MenuGroup, MenuItem, useAuths, useUserInfo } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa";
-import { useRef } from "react";
 
 import "./css/header.css";
 
 interface HeaderProps {
-  menus: MenuItem[];
+  menus: MenuGroup;
   setMainMenu: (mainMenu: MenuItem) => void;
 }
 
@@ -14,8 +13,6 @@ export function Header({ menus, setMainMenu }: HeaderProps) {
   const navigate = useNavigate();
   const auths = useAuths();
   const { userInfo, resetUserInfo } = useUserInfo();
-
-  const main = useRef<MenuItem>({ group: "main", id: "MAIN", url: "/", name: "Main" });
 
   const onLogOut = async () => {
     const ok = confirm("로그아웃 하시겠습니까?");
@@ -35,16 +32,11 @@ export function Header({ menus, setMainMenu }: HeaderProps) {
     <header>
       <nav>
         <div className="top-menu">
-          <div key={main.current.id} onClick={() => gotoMenu(main.current)}>
-            {main.current.name}
-          </div>
-          {menus
-            .filter(m => m.group === "main")
-            .map(m => (
-              <div key={m.id} onClick={() => gotoMenu(m)}>
-                {m.name}
-              </div>
-            ))}
+          {menus["root"].map(m => (
+            <div key={m.id} onClick={() => gotoMenu(m)}>
+              {m.name}
+            </div>
+          ))}
           <div className="slice">
             <a href="#">&nbsp;</a>
           </div>

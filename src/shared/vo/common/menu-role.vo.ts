@@ -1,6 +1,6 @@
-import { RoleType } from "../type/role-type";
+import { RoleType } from "../type";
 
-export interface UserRoleVo {
+export interface MenuRoleVo {
   id?: string;
   name?: RoleType;
   createdAt?: Date;

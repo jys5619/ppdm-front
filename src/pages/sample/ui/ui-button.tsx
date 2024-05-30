@@ -1,7 +1,7 @@
 export function UIButton() {
   return (
     <div>
-      <h2>Button</h2>
+      <h2>Table Page</h2>
       <hr />
     </div>
   );

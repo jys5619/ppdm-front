@@ -37,7 +37,5 @@ export function useLoginWidgetForm(props: LoginWidgetProps) {
     resolver: zodResolver(schema),
   });
 
-  console.log("2::", userEmail);
-
   return { register, handleSubmit, setError, errors, isSubmitting, isRemember };
 }

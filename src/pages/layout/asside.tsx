@@ -1,15 +1,14 @@
-import { MenuItem } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
 import { GroupMenu } from "./ui/group-menu";
-
 import "./css/aside.css";
 import { SubMenu } from "./ui/sub-menu";
+import { MenuGroup, MenuItem } from "@/shared/store";
 interface AsideProps {
-  groupMenu: MenuItem[];
-  subMenu: MenuItem[];
+  menus: MenuGroup;
+  asideMenus: MenuItem[];
 }
 
-export function Aside({ groupMenu, subMenu }: AsideProps) {
+export function Aside({ menus, asideMenus }: AsideProps) {
   const navigate = useNavigate();
 
   const gotoMenu = (menu: MenuItem) => {
@@ -20,15 +19,13 @@ export function Aside({ groupMenu, subMenu }: AsideProps) {
     <aside>
       <nav className="accordion-menu">
         <div className="accrodion">
-          {groupMenu.map(m => (
+          {asideMenus.map(m => (
             <div key={m.id}>
               <GroupMenu menu={m} key={m.id} />
               <div>
-                {subMenu
-                  .filter(sm => sm.group === m.id)
-                  .map(sm => (
-                    <SubMenu name={m.id} menu={sm} gotoMenu={gotoMenu} key={sm.id} />
-                  ))}
+                {menus[m.id].map(sm => (
+                  <SubMenu name={m.id} menu={sm} gotoMenu={gotoMenu} key={sm.id} />
+                ))}
               </div>
             </div>
           ))}

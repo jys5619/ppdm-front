@@ -1,16 +1,17 @@
-import ErrorPage from "../../pages/layout/error-page";
-import Layout from "../../pages/layout/layout";
-import { LoginPage } from "../../pages/auths/login/login-page";
-import { Database } from "../../pages/datas/database-page";
-import { MainPage } from "../../pages/main/main-page";
-import { MyPage } from "../../pages/my/my-page";
-import { DataPage } from "../../pages/datas/data-page";
 import ProtectedRoute from "./protected-route";
 import Sample from "@/pages/sample/sample";
 import { UI } from "@/pages/sample";
 import { CreateAccountPage } from "@/pages/auths/create-account/create-account-page";
 import { UIButton, UIInput, UILink, UITable, UITypography } from "@/pages/sample/ui";
 import { RouteObject } from "react-router-dom";
+import Layout from "@/pages/layout/layout";
+import { MainPage } from "@/pages/main/main-page";
+import { MyPage } from "@/pages/my/my-page";
+import { DataPage } from "@/pages/data/data-page";
+import { QueryPage, QueryTablePage } from "@/pages/data/query";
+import { DatabaseInfoPage, DatabasePage } from "@/pages/data/database";
+import { LoginPage } from "@/pages/auths/login/login-page";
+import ErrorPage from "@/pages/layout/error-page";
 
 export const ppdmRouter: RouteObject[] = [
   {
@@ -29,7 +30,7 @@ export const ppdmRouter: RouteObject[] = [
       {
         path: "my",
         element: <MyPage />,
-        children: [{ path: "database", element: <Database /> }],
+        children: [{ path: "database", element: <DatabasePage /> }],
       },
       {
         path: "data",
@@ -37,7 +38,27 @@ export const ppdmRouter: RouteObject[] = [
         children: [
           {
             path: "database",
-            element: <Database />,
+            element: <DatabasePage />,
+            children: [
+              {
+                path: "",
+                element: <DatabaseInfoPage />,
+              },
+              {
+                path: "info",
+                element: <DatabaseInfoPage />,
+              },
+            ],
+          },
+          {
+            path: "qyery",
+            element: <QueryPage />,
+            children: [
+              {
+                path: "",
+                element: <QueryTablePage />,
+              },
+            ],
           },
         ],
       },

@@ -13,6 +13,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: "@app", replacement: "/src/app" },
+      { find: "@pages", replacement: "/src/pages" },
       { find: "@widgets", replacement: "/src/widgets" },
       { find: "@shared", replacement: "/src/shared" },
       { find: "@", replacement: "/src" },

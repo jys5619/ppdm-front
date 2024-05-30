@@ -1,10 +1,11 @@
 import { SubmitHandler } from "react-hook-form";
 import { LoginFormFields, useLoginWidgetForm } from "../form/login-widget.form";
 import { LoginWidgetProps } from "../prop/login-widget.prop";
-import { useAppSetting, useAuths, useMenus } from "@/shared/store";
+import { MenuGroup, MenuItem, useAppSetting, useAuths, useMenus } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "@/shared/store/user-info.store";
 import { login } from "../api/login-widget.api";
+import { MenuVo } from "@/shared/vo/common";
 
 export function useLoginWidgetAction(props: LoginWidgetProps) {
   const { register, handleSubmit, setError, errors, isSubmitting, isRemember } =
@@ -25,11 +26,45 @@ export function useLoginWidgetAction(props: LoginWidgetProps) {
         setUserEmail(formData.remember ? formData.email : "");
       }
       setUserInfo(user);
-      setMenus(menus);
+      const menu = getMenuGroup(menus);
+      console.log("Menu ", menus, menu);
+      setMenus(menu);
       auths.login(access_token);
       navigate("/");
     } catch (e) {
       setError("root", { message: "사용자 정보를 정확히 입력 하십시오." });
+    }
+  };
+
+  const getMenuGroup = (menus: MenuVo[]): MenuGroup => {
+    const menuGroup: MenuGroup = {};
+    menuGroupSet(menuGroup, menus, "root");
+    if (menuGroup["root"]) {
+      menuGroup["root"].unshift({ parentId: "root", id: "main", url: "/", name: "Main" });
+    } else {
+      menuGroup["root"] = [{ parentId: "root", id: "main", url: "/", name: "Main" }];
+    }
+    return menuGroup;
+  };
+
+  const menuGroupSet = (menuGroup: MenuGroup, menus: MenuVo[], parentId: string) => {
+    const key = parentId;
+
+    const findMenus = menus.filter(m => key === (m.parentId || "root"));
+    if (!findMenus || findMenus.length === 0) return;
+
+    const menuItemList: MenuItem[] = findMenus.map(m => {
+      return {
+        id: m.id || "",
+        url: m.url || "",
+        name: m.name || "",
+        parentId: key,
+      };
+    });
+    menuGroup[key] = menuItemList;
+
+    for (const menuItem of menuItemList) {
+      menuGroupSet(menuGroup, menus, menuItem.id);
     }
   };
 
