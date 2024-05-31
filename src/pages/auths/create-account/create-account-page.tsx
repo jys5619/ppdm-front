@@ -1,6 +1,6 @@
 import { createAccountClass, mainClass } from "./create-account-page.css";
 import { Link } from "react-router-dom";
-import { CreateAccountWidget } from "@widgets/auths/create-account/create-account-widget";
+import { CreateAccountWidget } from "@widgets/common/auths/create-account/create-account-widget";
 
 export function CreateAccountPage() {
   return (

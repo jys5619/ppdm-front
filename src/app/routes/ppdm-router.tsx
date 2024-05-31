@@ -1,6 +1,6 @@
 import ProtectedRoute from "./protected-route";
 import Sample from "@/pages/sample/sample";
-import { UI } from "@/pages/sample";
+import { DB, UI } from "@/pages/sample";
 import { CreateAccountPage } from "@/pages/auths/create-account/create-account-page";
 import { UIButton, UIInput, UILink, UITable, UITypography } from "@/pages/sample/ui";
 import { RouteObject } from "react-router-dom";
@@ -12,6 +12,7 @@ import { QueryPage, QueryTablePage } from "@/pages/data/query";
 import { DatabaseInfoPage, DatabasePage } from "@/pages/data/database";
 import { LoginPage } from "@/pages/auths/login/login-page";
 import ErrorPage from "@/pages/layout/error-page";
+import { DBConnection } from "@/pages/sample/db";
 
 export const ppdmRouter: RouteObject[] = [
   {
@@ -93,6 +94,16 @@ export const ppdmRouter: RouteObject[] = [
               {
                 path: "input",
                 element: <UIInput />,
+              },
+            ],
+          },
+          {
+            path: "db",
+            element: <DB />,
+            children: [
+              {
+                path: "connection",
+                element: <DBConnection />,
               },
             ],
           },

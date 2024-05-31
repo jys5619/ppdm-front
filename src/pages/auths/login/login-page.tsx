@@ -1,4 +1,4 @@
-import { LoginWidget } from "@widgets/auths/login";
+import { LoginWidget } from "@widgets/common/auths/login";
 import { createAccountClass, mainClass } from "./login-page.css";
 import { Link } from "react-router-dom";
 
