@@ -1,3 +1,5 @@
-import { RoleType } from "./role-type";
+import { DbType, dbTypeList } from './db-type'
+import { RoleType, roleTypeList } from './role-type'
 
-export type { RoleType };
+export { roleTypeList, dbTypeList }
+export { RoleType, DbType }

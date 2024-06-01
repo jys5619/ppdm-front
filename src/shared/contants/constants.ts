@@ -9,6 +9,6 @@ const constants = {
   // [A-Za-z\d!@$%&*?] {8, 15} : 총 8자 이상 ~ 15자 이하의 영문 대/소문자, 숫자, 특수문자로 이루어진 문자열
   // $/ : 정규표현식 끝
   PASSWORD_REGEX: /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,15}$/,
-};
+}
 
-export default constants;
+export default constants

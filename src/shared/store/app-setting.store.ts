@@ -1,42 +1,48 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-export type ThemeType = "dark" | "light";
+export type ThemeType = 'dark' | 'light'
 
 type State = {
-  theme: ThemeType;
-  userEmail: string;
-};
+  theme: ThemeType
+  userEmail: string
+  database: string
+}
 
 type Actions = {
-  setTheme: (theme: ThemeType) => void;
-  setUserEmail: (email: string) => void;
-  resetAppSetting: () => void;
-};
+  setTheme: (theme: ThemeType) => void
+  setUserEmail: (email: string) => void
+  setDatabase: (database: string) => void
+  resetAppSetting: () => void
+}
 
-type Store = State & Actions;
+type Store = State & Actions
 
 const initialState: State = {
-  theme: "dark",
-  userEmail: "",
-};
+  theme: 'dark',
+  userEmail: '',
+  database: '',
+}
 
 export const useAppSetting = create(
   persist<Store>(
-    set => ({
+    (set) => ({
       ...initialState,
       setTheme: (theme: ThemeType) => {
-        set(() => ({ theme: theme }));
+        set(() => ({ theme: theme }))
       },
       setUserEmail: (email: string) => {
-        set(() => ({ userEmail: email }));
+        set(() => ({ userEmail: email }))
+      },
+      setDatabase: (database: string) => {
+        set(() => ({ database: database }))
       },
       resetAppSetting: () => {
-        set(initialState);
+        set(initialState)
       },
     }),
     {
-      name: "app-setting",
-    }
-  )
-);
+      name: 'app-setting',
+    },
+  ),
+)

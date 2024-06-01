@@ -1,3 +1,5 @@
-import { Button } from "./button/button";
+import { Button } from './button/button'
+import { Select, OptionType } from './select/select'
 
-export { Button };
+export type { OptionType }
+export { Button, Select }
