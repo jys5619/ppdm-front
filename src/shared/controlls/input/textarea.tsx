@@ -1,11 +1,13 @@
 import { Controller } from 'react-hook-form'
 import { ControlProps } from '../common'
+import { CSSProperties } from 'react'
 
 interface TextareaProps extends ControlProps {
+  style?: CSSProperties
   placeholder?: string
 }
 
-export const Textarea = ({ placeholder, ...rest }: TextareaProps) => {
+export const Textarea = ({ placeholder, style, ...rest }: TextareaProps) => {
   return (
     <Controller
       name={rest.name}
@@ -16,7 +18,7 @@ export const Textarea = ({ placeholder, ...rest }: TextareaProps) => {
             {...field}
             placeholder={placeholder}
             className={fieldState.invalid ? 'error' : ''}
-            style={{ width: '100%' }}
+            style={{ width: '100%', ...style }}
           />
           {fieldState.invalid && fieldState.error?.message && (
             <small>{fieldState.error?.message}</small>

@@ -14,7 +14,15 @@ export function QueryFormSqlEntity(props: QueryFormSqlEntityProps) {
     <div key={field.id} style={{ display: 'flex', flexDirection: 'column' }}>
       <Input name={title} control={control} placeholder="제목" />
       <Textarea name={description} control={control} placeholder="설명" />
-      <Textarea name={sql} control={control} placeholder="쿼리문" />
+      <Textarea
+        name={sql}
+        control={control}
+        placeholder="쿼리문"
+        style={{
+          backgroundColor: '#f5f5f5',
+          fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+        }}
+      />
       <div style={{ display: 'flex' }}>
         <button type="button" onClick={onUp}>
           <FaArrowUp />
