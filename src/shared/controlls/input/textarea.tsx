@@ -1,33 +1,22 @@
 import { Controller } from 'react-hook-form'
 import { ControlProps } from '../common'
 
-interface InputProps extends ControlProps {
-  type?: string
+interface TextareaProps extends ControlProps {
   placeholder?: string
-  disabled?: boolean
-  readOnly?: boolean
 }
 
-export const Input = ({
-  type = 'text',
-  placeholder,
-  disabled = false,
-  readOnly = false,
-  ...rest
-}: InputProps) => {
+export const Textarea = ({ placeholder, ...rest }: TextareaProps) => {
   return (
     <Controller
       name={rest.name}
       control={rest.control}
       render={({ field, fieldState }) => (
         <>
-          <input
+          <textarea
             {...field}
-            type={type}
             placeholder={placeholder}
             className={fieldState.invalid ? 'error' : ''}
-            disabled={disabled}
-            readOnly={readOnly}
+            style={{ width: '100%' }}
           />
           {fieldState.invalid && fieldState.error?.message && (
             <small>{fieldState.error?.message}</small>

@@ -10,10 +10,10 @@ export function DBConnection() {
     connectString: 'localhost:1521/ORCL',
     username: 'ppdm',
     password: 'ppdm12',
-    poolName: 'ppdm_dev2',
     poolMin: 1,
     poolMax: 3,
     timeout: 300,
+    dbInfo: '사용자들에게 보여줄 정보',
     state: ActiveInactiveState.Active,
   }
   return (

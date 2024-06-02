@@ -1,22 +1,23 @@
-import ProtectedRoute from "./protected-route";
-import Sample from "@/pages/sample/sample";
-import { DB, UI } from "@/pages/sample";
-import { CreateAccountPage } from "@/pages/auths/create-account/create-account-page";
-import { UIButton, UIInput, UILink, UITable, UITypography } from "@/pages/sample/ui";
-import { RouteObject } from "react-router-dom";
-import Layout from "@/pages/layout/layout";
-import { MainPage } from "@/pages/main/main-page";
-import { MyPage } from "@/pages/my/my-page";
-import { DataPage } from "@/pages/data/data-page";
-import { QueryPage, QueryTablePage } from "@/pages/data/query";
-import { DatabaseInfoPage, DatabasePage } from "@/pages/data/database";
-import { LoginPage } from "@/pages/auths/login/login-page";
-import ErrorPage from "@/pages/layout/error-page";
-import { DBConnection } from "@/pages/sample/db";
+import ProtectedRoute from './protected-route'
+import Sample from '@/pages/sample/sample'
+import { DB, UI } from '@/pages/sample'
+import { CreateAccountPage } from '@/pages/auths/create-account/create-account-page'
+import { UIButton, UIInput, UILink, UITable, UITypography } from '@/pages/sample/ui'
+import { RouteObject } from 'react-router-dom'
+import Layout from '@/pages/layout/layout'
+import { MainPage } from '@/pages/main/main-page'
+import { MyPage } from '@/pages/my/my-page'
+import { DataPage } from '@/pages/data/data-page'
+import { QueryPage, QueryTablePage } from '@/pages/data/query'
+import { DatabaseInfoPage, DatabasePage } from '@/pages/data/database'
+import { LoginPage } from '@/pages/auths/login/login-page'
+import ErrorPage from '@/pages/layout/error-page'
+import { DBConnection } from '@/pages/sample/db'
+import { DBQueryForm } from '@/pages/sample/db/db-query-form'
 
 export const ppdmRouter: RouteObject[] = [
   {
-    path: "/",
+    path: '/',
     element: (
       <ProtectedRoute>
         <Layout />
@@ -25,38 +26,38 @@ export const ppdmRouter: RouteObject[] = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
+        path: '',
         element: <MainPage />,
       },
       {
-        path: "my",
+        path: 'my',
         element: <MyPage />,
-        children: [{ path: "database", element: <DatabasePage /> }],
+        children: [{ path: 'database', element: <DatabasePage /> }],
       },
       {
-        path: "data",
+        path: 'data',
         element: <DataPage />,
         children: [
           {
-            path: "database",
+            path: 'database',
             element: <DatabasePage />,
             children: [
               {
-                path: "",
+                path: '',
                 element: <DatabaseInfoPage />,
               },
               {
-                path: "info",
+                path: 'info',
                 element: <DatabaseInfoPage />,
               },
             ],
           },
           {
-            path: "qyery",
+            path: 'qyery',
             element: <QueryPage />,
             children: [
               {
-                path: "",
+                path: '',
                 element: <QueryTablePage />,
               },
             ],
@@ -64,46 +65,50 @@ export const ppdmRouter: RouteObject[] = [
         ],
       },
       {
-        path: "sample",
+        path: 'sample',
         element: <Sample />,
         children: [
           {
-            path: "ui",
+            path: 'ui',
             element: <UI />,
             children: [
               {
-                path: "",
+                path: '',
                 element: <UITypography />,
               },
               {
-                path: "typography",
+                path: 'typography',
                 element: <UITypography />,
               },
               {
-                path: "link",
+                path: 'link',
                 element: <UILink />,
               },
               {
-                path: "button",
+                path: 'button',
                 element: <UIButton />,
               },
               {
-                path: "table",
+                path: 'table',
                 element: <UITable />,
               },
               {
-                path: "input",
+                path: 'input',
                 element: <UIInput />,
               },
             ],
           },
           {
-            path: "db",
+            path: 'db',
             element: <DB />,
             children: [
               {
-                path: "connection",
+                path: 'connection',
                 element: <DBConnection />,
+              },
+              {
+                path: 'query-form',
+                element: <DBQueryForm />,
               },
             ],
           },
@@ -112,13 +117,13 @@ export const ppdmRouter: RouteObject[] = [
     ],
   },
   {
-    path: "/login",
+    path: '/login',
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/create-account",
+    path: '/create-account',
     element: <CreateAccountPage />,
     errorElement: <ErrorPage />,
   },
-];
+]

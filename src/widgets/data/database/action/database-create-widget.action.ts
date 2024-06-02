@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { DatabaseVo } from '@/shared/vo/data'
 
 export function useDatabaseCreateWidgetAction(props: DatabaseCreateWidgetProps) {
-  const { control, register, handleSubmit, setError, watch, reset, errors } =
+  const { control, handleSubmit, setError, watch, reset, errors } =
     useDatabaseCreateWidgetForm(props)
   const [successMessage, setSuccessMessage] = useState<string | undefined>()
 
@@ -41,7 +41,6 @@ export function useDatabaseCreateWidgetAction(props: DatabaseCreateWidgetProps) 
 
   return {
     control,
-    register,
     handleSubmit,
     errors,
     watch,

@@ -8,11 +8,11 @@ export interface DatabaseVo {
   connectString?: string
   username?: string
   password?: string
-  poolName?: string
   poolMin?: number
   poolMax?: number
   timeout?: number
   state?: ActiveInactiveState
+  dbInfo?: string
   createdAt?: Date
   updatedAt?: Date
 }
