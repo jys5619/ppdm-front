@@ -10,7 +10,7 @@ export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
   const name = `${controlName}.${index}.name`;
   const title = `${controlName}.${index}.title`;
   const type = `${controlName}.${index}.type`;
-  const values = `${controlName}.${index}.values`;
+  const arrayData = `${controlName}.${index}.arrayData`;
 
   return (
     <div key={field.id} style={{ display: "flex" }}>
@@ -23,7 +23,7 @@ export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
         onChange={onChangeType}
       />
       <Input
-        name={values}
+        name={arrayData}
         control={control}
         placeholder={watchType === QueryFormInputType.INPUT ? "" : "배열명"}
         disabled={watchType === QueryFormInputType.INPUT}
