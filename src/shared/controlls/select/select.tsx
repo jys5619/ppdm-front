@@ -1,18 +1,19 @@
-import { Controller } from 'react-hook-form'
-import { ControlProps } from '../common'
-import { ChangeEvent } from 'react'
+import { Controller } from "react-hook-form";
+import { ControlProps } from "../common";
+import { ChangeEvent } from "react";
 
 export interface OptionType {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 interface SelectProps extends ControlProps {
-  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
-  typeList?: string[] | OptionType[]
+  showAll?: boolean;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  typeList?: string[] | OptionType[];
 }
 
-export const Select = ({ typeList, onChange, ...rest }: SelectProps) => {
+export const Select = ({ showAll, typeList, onChange, ...rest }: SelectProps) => {
   return (
     <Controller
       name={rest.name}
@@ -22,20 +23,25 @@ export const Select = ({ typeList, onChange, ...rest }: SelectProps) => {
           <select
             {...field}
             disabled={rest.disabled}
-            onChange={(e) => onChange && onChange(e)}
-            className={fieldState.invalid ? 'error' : ''}
+            onChange={e => onChange && onChange(e)}
+            className={fieldState.invalid ? "error" : ""}
           >
-            {typeList?.map((type) => {
-              let value = ''
-              let label = ''
-              if (typeof type === 'string') {
-                value = type
-                label = type
-              } else if (typeof type === 'object') {
-                value = type.value
-                label = type.label
+            {showAll && <option value=""></option>}
+            {typeList?.map(type => {
+              let value = "";
+              let label = "";
+              if (typeof type === "string") {
+                value = type;
+                label = type;
+              } else if (typeof type === "object") {
+                value = type.value;
+                label = type.label;
               }
-              return <option key={value}>{label}</option>
+              return (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              );
             })}
           </select>
 
@@ -45,5 +51,5 @@ export const Select = ({ typeList, onChange, ...rest }: SelectProps) => {
         </>
       )}
     />
-  )
-}
+  );
+};

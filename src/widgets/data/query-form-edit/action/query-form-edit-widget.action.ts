@@ -1,15 +1,18 @@
 import { SubmitHandler } from "react-hook-form";
-import { QueryFormWidgetProps } from "../prop/query-form-widget.prop";
-import { QueryFormFormFields, useQueryFormWidgetForm } from "../form/query-form-widget.form";
+import { QueryFormEditWidgetProps } from "../prop/query-form-edit-widget.prop";
+import {
+  QueryFormEditFormFields,
+  useQueryFormEditWidgetForm,
+} from "../form/query-form-edit-widget.form";
 import { useState } from "react";
-import { createQueryForm } from "../api/query-form-widget.api";
+import { createQueryForm } from "../api/query-form-edit-widget.api";
 import { QueryFormVo } from "@/shared/vo/data";
 
-export function useQueryFormWidgetAction(props: QueryFormWidgetProps) {
-  const { control, errors, form, inputList, sqlList } = useQueryFormWidgetForm(props);
+export function useQueryFormEditWidgetAction(props: QueryFormEditWidgetProps) {
+  const { control, errors, form, inputList, sqlList } = useQueryFormEditWidgetForm(props);
   const [successMessage, setSuccessMessage] = useState<string | undefined>();
 
-  const onSubmit: SubmitHandler<QueryFormFormFields> = async (data: QueryFormVo) => {
+  const onSubmit: SubmitHandler<QueryFormEditFormFields> = async (data: QueryFormVo) => {
     try {
       const res = await createQueryForm({ ...data });
       if (res.data && res.data.id) {

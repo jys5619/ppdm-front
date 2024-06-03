@@ -1,6 +1,6 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
-import { QueryFormWidgetProps } from "../prop/query-form-widget.prop";
+import { QueryFormEditWidgetProps } from "../prop/query-form-edit-widget.prop";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ActiveInactiveState } from "@/shared/vo/state";
 import { QueryFormInputType } from "@/shared/vo/type/query-form-input-type";
@@ -49,21 +49,21 @@ const schema = z.object({
   state: z.nativeEnum(ActiveInactiveState).default(ActiveInactiveState.Active),
 });
 
-export type QueryFormFormFields = z.infer<typeof schema>;
+export type QueryFormEditFormFields = z.infer<typeof schema>;
 
-export function useQueryFormWidgetForm(props: QueryFormWidgetProps) {
+export function useQueryFormEditWidgetForm(props: QueryFormEditWidgetProps) {
   const {
     control,
     formState: { errors },
     ...form
-  } = useForm<QueryFormFormFields>({
+  } = useForm<QueryFormEditFormFields>({
     defaultValues: {
       id: props.queryFormVo?.id,
       title: props.queryFormVo?.title,
       favorites: props.queryFormVo?.favorites,
       description: props.queryFormVo?.description,
       inputList: props.queryFormVo?.inputList,
-      sqlList: props.queryFormVo?.sqlList,
+      sqlList: props.queryFormVo?.sqlList || [{}],
       state: props.queryFormVo?.state,
     },
     resolver: zodResolver(schema),

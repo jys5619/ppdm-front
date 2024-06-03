@@ -1,14 +1,14 @@
 import { QueryFormInputEntity } from "@/entities/data/query-form-input";
-import { useQueryFormWidgetAction } from "./action/query-form-widget.action";
-import { errorRootClass, formClass } from "./css/query-form-widget.css";
-import { QueryFormWidgetProps } from "./prop/query-form-widget.prop";
+import { useQueryFormEditWidgetAction } from "./action/query-form-edit-widget.action";
+import { errorRootClass, formClass } from "./css/query-form-edit-widget.css";
+import { QueryFormEditWidgetProps } from "./prop/query-form-edit-widget.prop";
 import { Input, Textarea } from "@/shared/controlls";
 import { QueryFormInputType } from "@/shared/vo/type";
 import { QueryFormSqlEntity } from "@/entities/data/query-form-sql";
 
-export function QueryFormWidget(props: QueryFormWidgetProps) {
+export function QueryFormEditWidget(props: QueryFormEditWidgetProps) {
   const { control, errors, form, inputList, sqlList, successMessage, onSubmit } =
-    useQueryFormWidgetAction(props);
+    useQueryFormEditWidgetAction(props);
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className={formClass}>
@@ -19,6 +19,7 @@ export function QueryFormWidget(props: QueryFormWidgetProps) {
         placeholder="즐겨찾기 예)#favorites1 #favorites2"
       />
       <Textarea name="description" control={control} placeholder="Qury Form 설명" />
+      <hr />
       {inputList.fields.map((field, i) => {
         return (
           <QueryFormInputEntity
@@ -40,6 +41,7 @@ export function QueryFormWidget(props: QueryFormWidgetProps) {
       <button type="button" onClick={() => inputList.append({ type: QueryFormInputType.INPUT })}>
         INPUT DATA 추가
       </button>
+      <hr />
       {sqlList.fields.map((field, i) => {
         return (
           <QueryFormSqlEntity
@@ -58,6 +60,7 @@ export function QueryFormWidget(props: QueryFormWidgetProps) {
       <button type="button" onClick={() => sqlList.append({})}>
         SQL 추가
       </button>
+      <hr />
       {errors.root && <small className={errorRootClass}>{errors.root.message}</small>}
       {successMessage && <small>{successMessage}</small>}
       <button type="submit">저장</button>

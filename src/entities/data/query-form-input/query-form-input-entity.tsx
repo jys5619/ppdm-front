@@ -1,18 +1,19 @@
-import { Input, Select } from '@/shared/controlls'
-import { QueryFormInputType, queryFormInputTypeList } from '@/shared/vo/type'
-import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
-import { RiDeleteBin5Line } from 'react-icons/ri'
-import { QueryFormInputEntityProps } from './prop/query-form-input-entity.prop'
+import { Input, Select } from "@/shared/controlls";
+import { QueryFormInputType, queryFormInputTypeList } from "@/shared/vo/type";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { QueryFormInputEntityProps } from "./prop/query-form-input-entity.prop";
 
 export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
-  const { control, field, index, onChangeType, watchType, onUp, onDown, onRemove } = props
-  const name = `inputDataList.${index}.name`
-  const title = `inputDataList.${index}.title`
-  const type = `inputDataList.${index}.type`
-  const values = `inputDataList.${index}.values`
+  const { control, controlName, field, index, onChangeType, watchType, onUp, onDown, onRemove } =
+    props;
+  const name = `${controlName}.${index}.name`;
+  const title = `${controlName}.${index}.title`;
+  const type = `${controlName}.${index}.type`;
+  const values = `${controlName}.${index}.values`;
 
   return (
-    <div key={field.id} style={{ display: 'flex' }}>
+    <div key={field.id} style={{ display: "flex" }}>
       <Input name={name} control={control} placeholder="변수명" />
       <Input name={title} control={control} placeholder="필드명" />
       <Select
@@ -24,10 +25,10 @@ export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
       <Input
         name={values}
         control={control}
-        placeholder={watchType === QueryFormInputType.INPUT ? '' : '배열명'}
+        placeholder={watchType === QueryFormInputType.INPUT ? "" : "배열명"}
         disabled={watchType === QueryFormInputType.INPUT}
       />
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: "flex" }}>
         <button type="button" onClick={onUp}>
           <FaArrowUp />
         </button>
@@ -39,5 +40,5 @@ export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
         </button>
       </div>
     </div>
-  )
+  );
 }
