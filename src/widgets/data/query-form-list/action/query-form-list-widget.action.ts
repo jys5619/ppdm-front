@@ -6,9 +6,8 @@ import {
 } from "../form/query-form-list-widget.form";
 import { useState } from "react";
 import { QueryFormVo } from "@/shared/vo/data";
-import { getQueryFormList } from "../api/query-form-list-widget.api";
 import { AxiosError } from "axios";
-import { QueryFormListSearchVo } from "../vo/query-form-list-search.vo";
+import { QueryFormListSearchVo, getQueryFormList } from "@/shared/api/data";
 
 export function useQueryFormListWidgetAction(props: QueryFormListWidgetProps) {
   const { control, form } = useQueryFormListWidgetForm(props);

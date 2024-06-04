@@ -5,15 +5,14 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { QueryFormInputEntityProps } from "./prop/query-form-input-entity.prop";
 
 export function QueryFormInputEntity(props: QueryFormInputEntityProps) {
-  const { control, controlName, field, index, onChangeType, watchType, onUp, onDown, onRemove } =
-    props;
+  const { control, controlName, index, onChangeType, watchType, onUp, onDown, onRemove } = props;
   const name = `${controlName}.${index}.name`;
   const title = `${controlName}.${index}.title`;
   const type = `${controlName}.${index}.type`;
   const arrayData = `${controlName}.${index}.arrayData`;
 
   return (
-    <div key={field.id} style={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
       <Input name={name} control={control} placeholder="변수명" />
       <Input name={title} control={control} placeholder="필드명" />
       <Select

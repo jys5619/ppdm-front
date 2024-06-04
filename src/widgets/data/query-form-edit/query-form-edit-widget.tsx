@@ -26,7 +26,6 @@ export function QueryFormEditWidget(props: QueryFormEditWidgetProps) {
             key={i}
             control={control}
             controlName={"inputList"}
-            field={field}
             index={i}
             watchType={form.watch(`inputList.${i}.type`)}
             onChangeType={event =>
@@ -48,7 +47,6 @@ export function QueryFormEditWidget(props: QueryFormEditWidgetProps) {
             key={i}
             control={control}
             controlName={"sqlList"}
-            field={field}
             index={i}
             onUp={() => i > 0 && sqlList.swap(i, i - 1)}
             onDown={() => sqlList.fields.length - 1 > i && sqlList.swap(i + 1, i)}

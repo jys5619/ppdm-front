@@ -4,14 +4,14 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { QueryFormSqlEntityProps } from "./prop/query-form-sql-entity.prop";
 
 export function QueryFormSqlEntity(props: QueryFormSqlEntityProps) {
-  const { control, controlName, field, index, onUp, onDown, onRemove } = props;
+  const { control, controlName, index, onUp, onDown, onRemove } = props;
 
   const title = `${controlName}.${index}.title`;
   const description = `${controlName}.${index}.description`;
   const sql = `${controlName}.${index}.sql`;
 
   return (
-    <div key={field.id} style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Input name={title} control={control} placeholder="제목" />
       <Textarea name={description} control={control} placeholder="설명" />
       <Textarea

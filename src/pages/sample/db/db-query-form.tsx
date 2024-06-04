@@ -1,11 +1,10 @@
-import { QueryFormVo } from '@/shared/vo/data/query-form.vo'
-import { QueryFormEditWidget } from '@widgets/data/query-form-edit'
-import { QueryFormListWidget } from '@widgets/data/query-form-list/query-form-list-widget'
-import { useState } from 'react'
+import { QueryFormEditWidget } from "@widgets/data/query-form-edit";
+import { QueryFormListWidget } from "@widgets/data/query-form-list/query-form-list-widget";
+import { QueryFormRunWidget } from "@widgets/data/query-form-run";
+import { useState } from "react";
 
 export function DBQueryForm() {
-  const queryFormVo: QueryFormVo = {}
-  const [id, setId] = useState<string | undefined>()
+  const [id, setId] = useState<string | undefined>();
   return (
     <div>
       <h2>Query Form Create</h2>
@@ -15,8 +14,14 @@ export function DBQueryForm() {
       <br />
       <br />
       <br />
-      <h3>Query Form Edit</h3>
-      <QueryFormEditWidget id={id} />
+      {false && <h3>Query Form Edit</h3>}
+      {false && <QueryFormEditWidget id={id} />}
+      <br />
+      <br />
+      <br />
+      <h3>Query Form Run</h3>
+
+      <QueryFormRunWidget id={id} />
     </div>
-  )
+  );
 }
