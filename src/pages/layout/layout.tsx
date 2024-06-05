@@ -1,7 +1,8 @@
+import "./css/layout.css";
+import "./css/table.css";
 import { MenuItem, useAppSetting, useMenus } from "@/shared/store";
 import { Header } from "./header";
 import { Aside } from "./asside";
-import "./css/layout.css";
 import { Main } from "./main";
 import { useEffect, useState } from "react";
 

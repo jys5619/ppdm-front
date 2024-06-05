@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+  border: 1px solid rgb(67, 69, 70);
+  margin: 0px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  display: table;
+  border-spacing: 2px;
+  box-sizing: border-box;
+}
+
+table tr {
+  display: table-row;
+  min-height: 33px;
+}
+
+table td,
+table th {
+  border: 1px solid rgb(67, 69, 70);
+  padding: 2px 4px;
+}
