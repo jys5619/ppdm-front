@@ -1,36 +1,34 @@
-import { useNavigate } from "react-router-dom";
-import { GroupMenu } from "./ui/group-menu";
-import "./css/aside.css";
-import { SubMenu } from "./ui/sub-menu";
-import { MenuGroup, MenuItem } from "@/shared/store";
+import { useNavigate } from 'react-router-dom'
+import { GroupMenu } from './ui/group-menu'
+import './css/aside.css'
+import { SubMenu } from './ui/sub-menu'
+import { MenuGroup, MenuItem } from '@/shared/store'
 interface AsideProps {
-  menus: MenuGroup;
-  asideMenus: MenuItem[];
+  menus: MenuGroup
+  asideMenus: MenuItem[]
 }
 
-export function Aside({ menus, asideMenus }: AsideProps) {
-  const navigate = useNavigate();
+export function AsideNav({ menus, asideMenus }: AsideProps) {
+  const navigate = useNavigate()
 
   const gotoMenu = (menu: MenuItem) => {
-    navigate(menu.url);
-  };
+    navigate(menu.url)
+  }
 
   return (
-    <aside>
-      <nav className="accordion-menu">
-        <div className="accrodion">
-          {asideMenus.map(m => (
-            <div key={m.id}>
-              <GroupMenu menu={m} key={m.id} />
-              <div>
-                {menus[m.id].map(sm => (
-                  <SubMenu name={m.id} menu={sm} gotoMenu={gotoMenu} key={sm.id} />
-                ))}
-              </div>
+    <nav className="accordion-menu">
+      <div className="accrodion">
+        {asideMenus.map((m) => (
+          <div key={m.id}>
+            <GroupMenu menu={m} key={m.id} />
+            <div>
+              {menus[m.id].map((sm) => (
+                <SubMenu name={m.id} menu={sm} gotoMenu={gotoMenu} key={sm.id} />
+              ))}
             </div>
-          ))}
-        </div>
-      </nav>
-    </aside>
-  );
+          </div>
+        ))}
+      </div>
+    </nav>
+  )
 }

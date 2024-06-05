@@ -1,32 +1,41 @@
-import "./css/layout.css";
-import "./css/table.css";
-import { MenuItem, useAppSetting, useMenus } from "@/shared/store";
-import { Header } from "./header";
-import { Aside } from "./asside";
-import { Main } from "./main";
-import { useEffect, useState } from "react";
+import { MenuItem, useMenus } from '@/shared/store'
+import { Nav } from './header'
+import { AsideNav } from './asside'
+import { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { Container, Header, Aside, Main } from './css/layout.style'
 
 export default function Layout() {
-  const { menus } = useMenus();
-  const { theme } = useAppSetting();
+  const { menus } = useMenus()
 
-  const defaultMenu = menus["root"].find(m => m.id === "main");
+  const defaultMenu = menus['root'].find((m) => m.id === 'main')
   if (!defaultMenu) {
-    throw Error("Main Menu 가 없습니다.");
+    throw Error('Main Menu 가 없습니다.')
   }
 
-  const [mainMenu, setMainMenu] = useState<MenuItem>(defaultMenu);
-  const [asideMenus, setAsideMenus] = useState<MenuItem[]>([]);
+  const [mainMenu, setMainMenu] = useState<MenuItem>(defaultMenu)
+  const [asideMenus, setAsideMenus] = useState<MenuItem[]>([])
+  const [menuSplit, setMenuSplit] = useState<boolean>(false)
 
   useEffect(() => {
-    setAsideMenus(menus[mainMenu.id] || []);
-  }, [menus, mainMenu]);
+    setAsideMenus(menus[mainMenu.id] || [])
+  }, [menus, mainMenu])
+
+  useEffect(() => {
+    setMenuSplit(asideMenus.length <= 0)
+  }, [asideMenus.length])
 
   return (
-    <div data-theme={theme} className={`container main-block bg-${theme}`}>
-      <Header menus={menus} setMainMenu={setMainMenu} />
-      {asideMenus.length > 0 && <Aside menus={menus} asideMenus={asideMenus} />}
-      <Main isAsideHidden={asideMenus.length === 0} />
-    </div>
-  );
+    <Container>
+      <Header>
+        <Nav menus={menus} setMainMenu={setMainMenu} />
+      </Header>
+      <Aside menuSplit={menuSplit}>
+        <AsideNav menus={menus} asideMenus={asideMenus} />
+      </Aside>
+      <Main menuSplit={menuSplit}>
+        <Outlet />
+      </Main>
+    </Container>
+  )
 }

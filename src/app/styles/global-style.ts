@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components'
+import reset from 'styled-reset'
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -8,8 +8,11 @@ ${reset}
 }
 
 body {
-    background-color: #ffffff;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: ${(props) => props.theme.colors.colorBackground};
+    color: ${(props) => props.theme.colors.colorMainFont};
+    font-family: "Noto Sans KR", Tahoma, sans-serif ;
+    font-size: ${(props) => props.theme.fontSize}px;
+    overflow-y: hidden;
 }
 a {
     color: inherit;
@@ -35,6 +38,6 @@ img {
     width: 100%;
     height: 100%;
 }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle
