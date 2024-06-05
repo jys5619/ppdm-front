@@ -1,6 +1,5 @@
 import { ActiveInactiveState } from "../state";
-import { QueryFormInputVo } from "./query-form-input.vo";
-import { QueryFormSqlVo } from "./query-form-sql.vo";
+import { QueryFormInputType } from "../type";
 
 export interface QueryFormVo {
   id?: string;
@@ -12,4 +11,29 @@ export interface QueryFormVo {
   state?: ActiveInactiveState;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface QueryFormSqlVo {
+  id?: string;
+  title?: string;
+  description?: string;
+  sql?: string;
+}
+
+export interface QueryFormInputVo {
+  id?: string;
+  name?: string;
+  title?: string;
+  type?: QueryFormInputType;
+  arrayData?: string;
+}
+
+export interface QueryFormInputDataVo {
+  [x: string]: string | number | null | undefined;
+}
+
+export interface QueryFormResultDataVo {
+  id: string;
+  metaData: Array<{ name: string; dbType: string }>;
+  rows: Array<{ [x: string]: string | number | null | undefined }>;
 }

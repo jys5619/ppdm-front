@@ -1,7 +1,7 @@
 import { QueryFormInputEntity } from "@/entities/data/query-form-input";
-import { useQueryFormEditWidgetAction } from "./action/query-form-edit-widget.action";
-import { errorRootClass, formClass } from "./css/query-form-edit-widget.css";
-import { QueryFormEditWidgetProps } from "./prop/query-form-edit-widget.prop";
+import { useQueryFormEditWidgetAction } from "./segments/query-form-edit-widget.action";
+import { errorRootClass, formClass } from "./segments/query-form-edit-widget.css";
+import { QueryFormEditWidgetProps } from "./segments/query-form-edit-widget.prop";
 import { Input, Textarea } from "@/shared/controlls";
 import { QueryFormInputType } from "@/shared/vo/type";
 import { QueryFormSqlEntity } from "@/entities/data/query-form-sql";

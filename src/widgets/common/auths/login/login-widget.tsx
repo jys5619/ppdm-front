@@ -1,6 +1,6 @@
-import { errorClass, errorRootClass, formClass } from "./css/login-widget.css";
-import { LoginWidgetProps } from "./prop/login-widget.prop";
-import { useLoginWidgetAction } from "./action/login-widget.action";
+import { errorClass, errorRootClass, formClass } from "./segments/login-widget.css";
+import { LoginWidgetProps } from "./segments/login-widget.prop";
+import { useLoginWidgetAction } from "./segments/login-widget.action";
 
 export function LoginWidget(props: LoginWidgetProps) {
   const { register, handleSubmit, errors, isSubmitting, onSubmit, isRemember } =

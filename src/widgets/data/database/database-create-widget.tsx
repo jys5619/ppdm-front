@@ -1,19 +1,19 @@
-import { dbTypeList } from '@/shared/vo/type/db-type'
-import { useDatabaseCreateWidgetAction } from './action/database-create-widget.action'
-import { errorClass, errorRootClass, formClass } from './css/database-create-widget.css'
-import { DatabaseCreateWidgetProps } from './prop/database-create-widget.prop'
-import { activeInactiveStateList } from '@/shared/vo/state'
-import { Input, Select } from '@/shared/controlls'
+import { dbTypeList } from "@/shared/vo/type/db-type";
+import { useDatabaseCreateWidgetAction } from "./segments/database-create-widget.action";
+import { errorClass, errorRootClass, formClass } from "./segments/database-create-widget.css";
+import { DatabaseCreateWidgetProps } from "./segments/database-create-widget.prop";
+import { activeInactiveStateList } from "@/shared/vo/state";
+import { Input, Select } from "@/shared/controlls";
 
 export function DatabaseCreateWidget(props: DatabaseCreateWidgetProps) {
   const { control, handleSubmit, errors, watch, successMessage, onSubmit, onConnectionTest } =
-    useDatabaseCreateWidgetAction(props)
+    useDatabaseCreateWidgetAction(props);
 
-  const database = watch()
+  const database = watch();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={formClass}>
-      <h1>{props.title || 'Database 연결'}</h1>
+      <h1>{props.title || "Database 연결"}</h1>
       {errors.root && <small className={errorRootClass}>{errors.root.message}</small>}
       <Select name="dbType" control={control} typeList={dbTypeList} disabled={!!database.id} />
       {errors.dbType && <small className={errorClass}>{errors.dbType.message}</small>}
@@ -58,5 +58,5 @@ export function DatabaseCreateWidget(props: DatabaseCreateWidgetProps) {
         연결 테스트
       </button>
     </form>
-  )
+  );
 }

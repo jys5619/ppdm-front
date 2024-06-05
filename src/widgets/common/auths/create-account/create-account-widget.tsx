@@ -1,6 +1,6 @@
-import { useCreateAccountWidgetAction } from "./action/create-account-widget.action";
-import { errorClass, errorRootClass, formClass } from "./css/create-account-widget.css";
-import { CreateAccountWidgetProps } from "./prop/create-account-widget.prop";
+import { useCreateAccountWidgetAction } from "./segments/create-account-widget.action";
+import { errorClass, errorRootClass, formClass } from "./segments/create-account-widget.css";
+import { CreateAccountWidgetProps } from "./segments/create-account-widget.prop";
 
 export function CreateAccountWidget(props: CreateAccountWidgetProps) {
   const { register, handleSubmit, errors, isSubmitting, onSubmit } =

@@ -1,11 +1,12 @@
-import { useQueryFormRunWidgetAction } from "./action/query-form-run-widget.action";
-import { QueryFormRunWidgetProps } from "./prop/query-form-run-widget.prop";
-import { QueryFormInputType } from "@/shared/vo/type";
-import { QueryFormInputVo, QueryFormSqlVo } from "@/shared/vo/data";
+import { useQueryFormRunWidgetAction } from "./segments/query-form-run-widget.action";
+import { QueryFormRunWidgetProps } from "./segments/query-form-run-widget.prop";
 import { DatabaseListButtonEntity } from "@/entities/data/database-list-button";
+import { QueryFormInputVo, QueryFormSqlVo } from "@/shared/vo/data";
+import { QueryFormSqlInputEntity } from "@/entities/data/query-form-sql-input";
+import { QueryFormSqlResultEntity } from "@/entities/data/query-form-sql-result";
 
 export function QueryFormRunWidget(props: QueryFormRunWidgetProps) {
-  const { queryFormVo, databaseId, setDatabaseId, searchDataMap, runSql } =
+  const { queryFormVo, databaseId, setDatabaseId, searchDataMap, runSql, resultData } =
     useQueryFormRunWidgetAction(props);
 
   return (
@@ -14,46 +15,24 @@ export function QueryFormRunWidget(props: QueryFormRunWidgetProps) {
       <p>{queryFormVo?.favorites}</p>
       <p>{queryFormVo?.description}</p>
       {queryFormVo?.inputList &&
-        queryFormVo.inputList.map((input: QueryFormInputVo) => {
+        queryFormVo.inputList.map((queryFormInput: QueryFormInputVo) => {
           return (
-            <div key={input.id}>
-              <h3>
-                {input.title}({input.name})
-              </h3>
-              <span>
-                {input.type === QueryFormInputType.INPUT && (
-                  <input
-                    type="text"
-                    onChange={e => (searchDataMap.current[input.name || ""] = e.target.value)}
-                  />
-                )}
-                {input.type === QueryFormInputType.SELECT && (
-                  <select
-                    onChange={e => (searchDataMap.current[input.name || ""] = e.target.value)}
-                  >
-                    <option value=""></option>
-                    {input.arrayData?.split("|").map(o => {
-                      return (
-                        <option key={o} value={o}>
-                          {o}
-                        </option>
-                      );
-                    })}
-                  </select>
-                )}
-              </span>
-            </div>
+            <QueryFormSqlInputEntity
+              key={queryFormInput.id}
+              queryFormInput={queryFormInput}
+              onChange={e => (searchDataMap.current[queryFormInput.name || ""] = e.target.value)}
+            />
           );
         })}
 
       {queryFormVo?.sqlList &&
-        queryFormVo.sqlList.map((sql: QueryFormSqlVo) => {
+        queryFormVo.sqlList.map((queryFormSql: QueryFormSqlVo) => {
           return (
-            <div key={sql.id}>
-              <h3>{sql.title}</h3>
-              <p>{sql.description}</p>
-              <span>{sql.sql}</span>
-            </div>
+            <QueryFormSqlResultEntity
+              key={queryFormSql.id}
+              queryFormSql={queryFormSql}
+              resultData={resultData && resultData.find(r => r.id === queryFormSql.id)}
+            />
           );
         })}
 
@@ -62,7 +41,7 @@ export function QueryFormRunWidget(props: QueryFormRunWidgetProps) {
         type="button"
         onClick={() => runSql(databaseId, queryFormVo?.id || "", searchDataMap.current)}
       >
-        저장
+        실행
       </button>
     </div>
   );
