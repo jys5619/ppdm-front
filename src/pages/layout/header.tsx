@@ -1,8 +1,7 @@
 import { MenuGroup, MenuItem, useAppSetting, useAuths, useUserInfo } from "@/shared/store";
 import { useNavigate } from "react-router-dom";
-
-import styled from "styled-components";
 import { MenuCombo } from "./ui/header/menu-combo";
+import { Menu, MenuLink, MenuSlice, NavFrame } from "./css/header.style";
 interface HeaderProps {
   menus: MenuGroup;
   setMainMenu: (mainMenu: MenuItem) => void;
@@ -38,7 +37,6 @@ export function Nav({ menus, setMainMenu }: HeaderProps) {
       {menus["root"].map(m => (
         <Menu key={m.id}>
           <MenuLink onClick={() => gotoMenu(m)}>{m.name}</MenuLink>
-          {m.name}
         </Menu>
       ))}
       <MenuSlice />
@@ -71,28 +69,3 @@ export function Nav({ menus, setMainMenu }: HeaderProps) {
     </NavFrame>
   );
 }
-
-const NavFrame = styled.nav`
-  display: flex;
-  width: 100%;
-  align-items: stretch;
-`;
-
-const Menu = styled.div`
-  flex-wrap: wrap;
-  flex-shrink: 0;
-  cursor: pointer;
-  font-size: inherit;
-`;
-
-const MenuLink = styled.a`
-  display: inline-block;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 8px 24px;
-  font-size: 0.92rem;
-`;
-
-const MenuSlice = styled.div`
-  flex-grow: 1;
-`;

@@ -7,11 +7,14 @@ ${reset}
     box-sizing: border-box;
 }
 
+html {
+    font-size: ${props => props.theme.font.fontSize}px;
+}
+
 body {
     background-color: ${props => props.theme.colors.colorBackground};
     color: ${props => props.theme.colors.colorMainFont};
     font-family: "Noto Sans KR", Tahoma, sans-serif ;
-    font-size: ${props => props.theme.font.fontSize}px;
     overflow-y: hidden;
 }
 a {

@@ -9,8 +9,8 @@ interface MainProps {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 2.1rem auto;
-  grid-template-columns: 300px auto; /* 메뉴 숨기기 : 300px auto; 0 auto */
+  grid-template-rows: 2.9rem auto;
+  grid-template-columns: 30rem auto; /* 메뉴 숨기기 : 300px auto; 0 auto */
   height: 100dvh;
   gap: 1px;
   background-color: ${props => props.theme.colors.colorBorder};

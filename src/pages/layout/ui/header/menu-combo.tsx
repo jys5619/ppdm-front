@@ -44,14 +44,14 @@ const MenuComboWrapper = styled.div`
   flex-shrink: 0;
   padding: 0 !important;
   margin: 0 !important;
-  font-size: 0.92rem;
+  font-size: 1.5rem;
 `;
 
 const MenuTitle = styled.div`
   display: inline-block;
   font-weight: bold;
   text-decoration: none;
-  padding: 0.39rem 2rem;
+  padding: 0.6rem 2rem;
   margin: 0;
 `;
 
@@ -67,15 +67,16 @@ const MenuList = styled.div<MenuListProps>`
 `;
 
 const MenuListBox = styled.div`
+  box-shadow: 0 0 4px 4px #333;
   background-color: ${props => props.theme.colors.colorBackground};
   text-align: left;
-  padding: 0.4rem 2rem;
+  padding: 0.6rem 2rem;
   border: 1px solid ${props => props.theme.colors.colorBorder};
   display: inline-block;
 `;
 
 const Option = styled.div`
-  padding: 0.4rem 0;
+  padding: 0.6rem 0;
   button {
     cursor: pointer;
   }
