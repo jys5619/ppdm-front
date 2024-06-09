@@ -1,40 +1,88 @@
-import { MenuItem, useMenus } from '@/shared/store'
-import { Nav } from './header'
-import { AsideNav } from './asside'
+import { HeaderNav } from './header-nav'
+// import { AsideNav } from './asside-nav'
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import { Container, Header, Aside, Main } from './css/layout.style'
+import { Aside, Container, Header, ActiveTabs, Main } from './css/layout.style'
+import { routeList } from '@/app/routes/ppdm-router'
+import { useActiveMenus } from '@/shared/store/active-menus.store'
+import { MainPage } from '../main/main-page'
 
 export default function Layout() {
-  const { menus } = useMenus()
-
-  const defaultMenu = menus['root'].find((m) => m.id === 'main')
-  if (!defaultMenu) {
-    throw Error('Main Menu 가 없습니다.')
-  }
-
-  const [mainMenu, setMainMenu] = useState<MenuItem>(defaultMenu)
-  const [asideMenus, setAsideMenus] = useState<MenuItem[]>([])
-  const [menuSplit, setMenuSplit] = useState<boolean>(false)
+  const [display, setDisplay] = useState<string>('block')
+  const activeMenus = useActiveMenus()
 
   useEffect(() => {
-    setAsideMenus(menus[mainMenu.id] || [])
-  }, [menus, mainMenu])
+    if (activeMenus.menus.length === 0) {
+      const defaultMenu = routeList.find((r) => r.path === '')
+      if (defaultMenu) {
+        activeMenus.add({ path: '', name: 'Main', element: <MainPage /> })
+      }
+    }
+  }, [activeMenus])
 
-  useEffect(() => {
-    setMenuSplit(asideMenus.length <= 0)
-  }, [asideMenus.length])
+  console.log(
+    'routeList',
+    routeList.length,
+    activeMenus.menus.length,
+    '[' + activeMenus.currentPath + ']',
+  )
 
   return (
     <Container>
       <Header>
-        <Nav menus={menus} setMainMenu={setMainMenu} />
+        <HeaderNav display={display} setDisplay={setDisplay} />
       </Header>
-      <Aside menuSplit={menuSplit}>
-        <AsideNav menus={menus} asideMenus={asideMenus} />
-      </Aside>
-      <Main menuSplit={menuSplit}>
-        <Outlet />
+      <Aside display={display}>aside</Aside>
+      {/* <Aside asideHide={asideHide}>
+        <AsideNav />
+      </Aside> */}
+
+      <ActiveTabs display={display}>
+        {activeMenus.menus.map((m) => {
+          return (
+            <div
+              key={m.path}
+              style={{
+                display: 'inline-block',
+                padding: '0.3rem 0.3rem 0.3rem 0.6rem',
+                marginTop: '0.3rem',
+                marginLeft: '0.3rem',
+                marginBottom: '0.3rem',
+                border: '1px solid gray',
+                cursor: 'pointer',
+                borderRadius: '3px',
+              }}
+            >
+              {m.name}
+              <button
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  display: 'block',
+                  width: '1rem',
+                  height: '1rem',
+                  clear: 'both',
+                  float: 'right',
+                  marginLeft: '0.3rem',
+                  border: '1px dotted #fff',
+                  background: 'pink',
+                  borderRadius: '3px',
+                  top: '3px',
+                }}
+              >
+                x
+              </button>
+            </div>
+          )
+        })}
+      </ActiveTabs>
+      <Main display={display}>
+        {activeMenus.menus.map((m) => {
+          return (
+            <div key={m.path} style={{ width: '100%' }}>
+              {m.element}
+            </div>
+          )
+        })}
       </Main>
     </Container>
   )

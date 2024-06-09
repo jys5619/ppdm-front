@@ -1,20 +1,25 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 interface AsideProps {
-  menuSplit: boolean;
+  display: string
 }
+
+interface ActiveTabsProps {
+  display: string
+}
+
 interface MainProps {
-  menuSplit: boolean;
+  display: string
 }
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 2.9rem auto;
+  grid-template-rows: 3rem 2.3rem auto;
   grid-template-columns: 30rem auto; /* 메뉴 숨기기 : 300px auto; 0 auto */
   height: 100dvh;
   gap: 1px;
-  background-color: ${props => props.theme.colors.colorBorder};
-`;
+  background-color: ${(props) => props.theme.colors.colorBorder};
+`
 
 const Header = styled.header`
   grid-column-start: 1;
@@ -22,21 +27,31 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: ${props => props.theme.colors.colorBackground};
-`;
+  background-color: ${(props) => props.theme.colors.colorBackground};
+`
 
 const Aside = styled.aside<AsideProps>`
   grid-column-start: 1;
   grid-column-end: 2;
-  display: ${props => (props.menuSplit ? "none" : "inline")};
-  background-color: ${props => props.theme.colors.colorBackground};
-`;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  display: ${(props) => props.display};
+  background-color: ${(props) => props.theme.colors.colorBackground};
+`
+
+const ActiveTabs = styled.aside<ActiveTabsProps>`
+  grid-column-start: ${(props) => (props.display === 'none' ? 1 : 2)};
+  grid-column-end: 3;
+  display: flex;
+  display: ${(props) => props.display};
+  background-color: ${(props) => props.theme.colors.colorBackground};
+`
 
 const Main = styled.main<MainProps>`
-  grid-column-start: ${props => (props.menuSplit ? 1 : 2)};
+  grid-column-start: ${(props) => (props.display === 'none' ? 1 : 2)};
   grid-column-end: 3;
   display: flex;
   overflow-y: auto;
-  background-color: ${props => props.theme.colors.colorBackground};
-`;
-export { Container, Header, Aside, Main };
+  background-color: ${(props) => props.theme.colors.colorBackground};
+`
+export { Container, Header, Aside, ActiveTabs, Main }

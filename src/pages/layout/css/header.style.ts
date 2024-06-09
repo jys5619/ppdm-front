@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const NavFrame = styled.nav`
   display: flex;
   width: 100%;
   padding: 0;
   align-items: stretch;
-`;
+`
 
 export const Menu = styled.div`
   flex-wrap: wrap;
@@ -13,7 +13,7 @@ export const Menu = styled.div`
   cursor: pointer;
   padding: 0;
   font-size: inherit;
-`;
+`
 
 export const MenuLink = styled.a`
   display: inline-block;
@@ -22,8 +22,8 @@ export const MenuLink = styled.a`
   margin: 0;
   padding: 0.6rem 2rem;
   font-size: 1.5rem;
-`;
+`
 
 export const MenuSlice = styled.div`
   flex-grow: 1;
-`;
+`

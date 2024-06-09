@@ -1,83 +1,82 @@
-import { useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
-import styled from "styled-components";
+import { useState } from 'react'
+import styled from 'styled-components'
 
 interface MenuComboProps {
-  title: string;
+  title: string
   options: {
-    title: string;
-    onClick: () => void;
-  }[];
+    title: string
+    onClick: () => void
+  }[]
 }
 
 export function MenuCombo({ title, options }: MenuComboProps) {
-  const [hide, setHide] = useState<boolean>(true);
+  const [display, setDisplay] = useState<string>('none')
 
   return (
-    <MenuComboWrapper>
-      <MenuTitle>
-        <a onClick={() => setHide(state => !state)}>
-          {title}
-          <FaCaretDown style={{ verticalAlign: "middle" }} />
+    <MenuComboWrapper onMouseLeave={() => setDisplay('none')}>
+      <MenuComboTitle>
+        <a onClick={() => setDisplay((state) => (state === 'none' ? 'block' : 'none'))}>
+          {title} <span style={{ fontSize: '0.8rem' }}>▼</span>
         </a>
-      </MenuTitle>
-      <MenuList hide={hide}>
-        <MenuListBox>
-          {options.map(option => (
-            <Option
+      </MenuComboTitle>
+      <MenuComboList display={display}>
+        <MenuComboListBox>
+          {options.map((option) => (
+            <MenuComboOption
+              key={option.title}
               onClick={() => {
-                setHide(true);
-                option.onClick();
+                setDisplay('none')
+                option.onClick()
               }}
             >
               {option.title}
-            </Option>
+            </MenuComboOption>
           ))}
-        </MenuListBox>
-      </MenuList>
+        </MenuComboListBox>
+      </MenuComboList>
     </MenuComboWrapper>
-  );
+  )
 }
 
 const MenuComboWrapper = styled.div`
-  flex-wrap: wrap;
-  flex-shrink: 0;
   padding: 0 !important;
   margin: 0 !important;
   font-size: 1.5rem;
-`;
+`
 
-const MenuTitle = styled.div`
+const MenuComboTitle = styled.div`
   display: inline-block;
-  font-weight: bold;
   text-decoration: none;
   padding: 0.6rem 2rem;
+  height: 3rem;
   margin: 0;
-`;
+`
 
 interface MenuListProps {
-  hide?: boolean;
+  display: string
 }
 
-const MenuList = styled.div<MenuListProps>`
+const MenuComboList = styled.div<MenuListProps>`
+  font-size: 1.2rem;
   position: relative;
   padding: 0 2rem;
   text-align: right;
-  display: ${props => (props.hide ? "none" : "block")};
-`;
-
-const MenuListBox = styled.div`
-  box-shadow: 0 0 4px 4px #333;
-  background-color: ${props => props.theme.colors.colorBackground};
+  display: ${(props) => props.display};
+`
+//0 10px 10px rgba(160, 160, 160, 0.22);
+const MenuComboListBox = styled.div`
+  box-shadow: ${(props) => props.theme.colors.colorShadow};
+  background-color: ${(props) => props.theme.colors.colorBackground};
   text-align: left;
   padding: 0.6rem 2rem;
-  border: 1px solid ${props => props.theme.colors.colorBorder};
+  border: 1px solid ${(props) => props.theme.colors.colorBorder};
   display: inline-block;
-`;
+`
 
-const Option = styled.div`
-  padding: 0.6rem 0;
+const MenuComboOption = styled.div`
+  padding: 0.4rem 0;
+  cursor: pointer;
   button {
     cursor: pointer;
   }
-`;
+`
