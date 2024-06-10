@@ -12,6 +12,10 @@ declare module 'styled-components' {
       colorBackground: string
       colorBorder: string
       colorMainFont: string
+      colorMenuShdow: string
+      colorPointColor: string
+      colorActive: string
+      colorEnactive: string
       colorSkyBlue: string
       colorBlue: string
       colorDisabled: string
