@@ -9,6 +9,7 @@ ${reset}
 
 html {
     font-size: ${props => props.theme.font.fontSize}px;
+    letter-spacing:0.05rem
 }
 
 body {
