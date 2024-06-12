@@ -1,15 +1,28 @@
-import { MouseEvent, ReactNode } from "react";
-import "./css/button.css";
+import { MouseEvent, ReactNode } from 'react'
+import styled from 'styled-components'
 
 interface ButtionProps {
-  children: ReactNode;
-  onClick: (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
+  type: 'submit' | 'reset' | 'button' | undefined
+  children: ReactNode
+  onClick?: (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void
 }
 
 export function Button(props: ButtionProps) {
   return (
-    <button className="button" onClick={event => props.onClick(event)}>
+    <ButtonControl
+      type={props.type}
+      disabled={true}
+      onClick={(event) => props.onClick && props.onClick(event)}
+    >
       {props.children}
-    </button>
-  );
+    </ButtonControl>
+  )
 }
+
+const ButtonControl = styled.button`
+  flex-grow: 1;
+  border: 1px solid ${(props) => props.theme.colors.colorControlPrimaryBorder};
+  color: ${(props) => props.theme.colors.colorControlPrimaryFont};
+  background-color: ${(props) => props.theme.colors.colorControlPrimaryBackground};
+  border-radius: 0.3rem;
+`

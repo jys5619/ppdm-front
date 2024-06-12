@@ -1,19 +1,18 @@
-import { dbTypeList } from "@/shared/vo/type/db-type";
-import { useDatabaseCreateWidgetAction } from "./segments/database-create-widget.action";
-import { errorClass, errorRootClass, formClass } from "./segments/database-create-widget.css";
-import { DatabaseCreateWidgetProps } from "./segments/database-create-widget.prop";
-import { activeInactiveStateList } from "@/shared/vo/state";
-import { Input, Select, Textarea } from "@/shared/controlls";
-import styled from "styled-components";
+import { dbTypeList } from '@/shared/vo/type/db-type'
+import { useDatabaseCreateWidgetAction } from './segments/database-create-widget.action'
+import { DatabaseCreateWidgetProps } from './segments/database-create-widget.prop'
+import { activeInactiveStateList } from '@/shared/vo/state'
+import { Button, Input, Select, Textarea } from '@/shared/controlls'
+import styled from 'styled-components'
 
 export function DatabaseCreateWidget(props: DatabaseCreateWidgetProps) {
-  const { control, handleSubmit, errors, watch, successMessage, onSubmit, onConnectionTest } =
-    useDatabaseCreateWidgetAction(props);
+  const { control, watch, apiResult, onConnectionTest, onSubmit } =
+    useDatabaseCreateWidgetAction(props)
 
-  const database = watch();
+  const database = watch()
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className={formClass}>
+    <Form>
       <Table>
         <Row>
           <Label>Database Type</Label>
@@ -24,7 +23,6 @@ export function DatabaseCreateWidget(props: DatabaseCreateWidgetProps) {
               typeList={dbTypeList}
               disabled={!!database.id}
             />
-            {errors.dbType && <small className={errorClass}>{errors.dbType.message}</small>}
           </Control>
         </Row>
         <Row>
@@ -101,56 +99,76 @@ export function DatabaseCreateWidget(props: DatabaseCreateWidgetProps) {
               control={control}
               name="dbInfo"
               placeholder="사용자에게 보여줄 정보"
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               rows={10}
             />
           </Control>
         </Row>
         <Row>
-          <Label>사용자에게 보여줄 DB정보</Label>
+          <Label>상태</Label>
           <Control>
             <Select name="state" control={control} typeList={activeInactiveStateList} />
           </Control>
         </Row>
       </Table>
-
-      {successMessage && <small>{successMessage}</small>}
-      {errors.root && <small className={errorRootClass}>{errors.root.message}</small>}
-      <button type="submit" onClick={() => onConnectionTest(database)}>
-        연결 테스트
-      </button>
+      <ButtonWrapper>
+        <Button type="button" onClick={() => onConnectionTest(database)}>
+          연결 테스트
+        </Button>
+        <Button type="button" onClick={() => onSubmit(database)}>
+          저장
+        </Button>
+      </ButtonWrapper>
+      <ApiMessage state={apiResult?.state}>{apiResult?.message}</ApiMessage>
     </Form>
-  );
+  )
 }
-const Form = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
+const Form = styled.form``
 
 const Table = styled.form`
-  border-top: 1px solid ${props => props.theme.colors.colorDarkGray};
-  border-left: 1px solid ${props => props.theme.colors.colorDarkGray};
-  border-right: 1px solid ${props => props.theme.colors.colorDarkGray};
+  border-top: 1px solid ${(props) => props.theme.colors.colorDarkGray};
+  border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
+  border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
+  border-radius: 0.3rem;
+`
 
 const Row = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.colorDarkGray};
+  border-bottom: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   display: flex;
-`;
+`
 
 const Label = styled.div`
   padding: 0.6rem;
   width: 20rem;
-  border-right: 1px solid ${props => props.theme.colors.colorDarkGray};
-`;
+  border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
+`
 
 const Control = styled.div`
   flex-grow: 1;
   display: flex;
   justify-items: center;
   padding: 0.3rem;
-`;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.6rem;
+`
+
+interface ApiMessageProps {
+  state?: 'success' | 'error'
+}
+
+const ApiMessage = styled.div<ApiMessageProps>`
+  display: ${(props) => (props.state ? 'block' : 'none')};
+  border: 1px solid ${(props) => (props.state === 'success' ? '#00ff00' : '#ff00ff')};
+  color: ${(props) => (props.state === 'success' ? '#00ff00' : '#ff00ff')};
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.3rem;
+`

@@ -1,18 +1,19 @@
-import { Controller } from "react-hook-form";
-import { ControlProps } from "../common";
+import { Controller } from 'react-hook-form'
+import { ControlProps } from '../common'
+import styled from 'styled-components'
 
 interface InputProps extends ControlProps {
-  type?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
+  type?: string
+  placeholder?: string
+  disabled?: boolean
+  readOnly?: boolean
 }
 
 export const Input = ({
   control,
   name,
   placeholder,
-  type = "text",
+  type = 'text',
   disabled = false,
   readOnly = false,
 }: InputProps) => {
@@ -22,10 +23,10 @@ export const Input = ({
       control={control}
       render={({ field, fieldState }) => (
         <>
-          <input
+          <InputControl
             {...field}
             type={type}
-            className={fieldState.invalid ? "error" : ""}
+            className={fieldState.invalid ? 'error' : ''}
             disabled={disabled}
             readOnly={readOnly}
             placeholder={placeholder}
@@ -36,5 +37,14 @@ export const Input = ({
         </>
       )}
     />
-  );
-};
+  )
+}
+
+const InputControl = styled.input`
+  flex-grow: 1;
+  border: 1px solid ${(props) => props.theme.colors.colorControlBorder};
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  color: ${(props) => props.theme.colors.colorControlFont};
+  background-color: ${(props) => props.theme.colors.colorControlBackground};
+`
