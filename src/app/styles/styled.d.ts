@@ -1,31 +1,30 @@
-import 'styled-components'
+import "styled-components";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     font: {
-      fontSize: number
-      fontFamily: string
-      fontWeight: string | number
-    }
+      fontSize: number;
+      fontFamily: string;
+      fontWeight: string | number;
+    };
     colors: {
-      colorMain: string
-      colorBackground: string
-      colorBorder: string
-      colorMainFont: string
-      colorMenuShdow: string
-      colorPointColor: string
-      colorActive: string
-      colorEnactive: string
-      colorSkyBlue: string
-      colorBlue: string
-      colorDisabled: string
-      colorGray: string
-      colorDarkGray: string
-      colorWhite: string
-      colorRed: string
-      colorDiRed: string
-      colorShadow: string
-      colorDarkShadow: string
-    }
+      colorMain: string;
+      colorBackground: string;
+      colorBorder: string;
+      colorMainFont: string;
+      colorMenuShdow: string;
+      colorActive: string;
+      colorEnactive: string;
+      colorPointColor: string;
+      colorBlue: string;
+      colorDisabled: string;
+      colorGray: string;
+      colorDarkGray: string;
+      colorWhite: string;
+      colorRed: string;
+      colorDiRed: string;
+      colorShadow: string;
+      colorDarkShadow: string;
+    };
   }
 }
