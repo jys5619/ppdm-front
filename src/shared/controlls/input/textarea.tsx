@@ -1,13 +1,14 @@
-import { Controller } from 'react-hook-form'
-import { ControlProps } from '../common'
-import { CSSProperties } from 'react'
+import { Controller } from "react-hook-form";
+import { ControlProps } from "../common";
+import { CSSProperties } from "react";
 
 interface TextareaProps extends ControlProps {
-  style?: CSSProperties
-  placeholder?: string
+  style?: CSSProperties;
+  placeholder?: string;
+  rows?: number;
 }
 
-export const Textarea = ({ placeholder, style, ...rest }: TextareaProps) => {
+export const Textarea = ({ placeholder, style, rows, ...rest }: TextareaProps) => {
   return (
     <Controller
       name={rest.name}
@@ -17,8 +18,9 @@ export const Textarea = ({ placeholder, style, ...rest }: TextareaProps) => {
           <textarea
             {...field}
             placeholder={placeholder}
-            className={fieldState.invalid ? 'error' : ''}
-            style={{ width: '100%', ...style }}
+            className={fieldState.invalid ? "error" : ""}
+            style={{ width: "100%", ...style }}
+            rows={rows}
           />
           {fieldState.invalid && fieldState.error?.message && (
             <small>{fieldState.error?.message}</small>
@@ -26,5 +28,5 @@ export const Textarea = ({ placeholder, style, ...rest }: TextareaProps) => {
         </>
       )}
     />
-  )
-}
+  );
+};
