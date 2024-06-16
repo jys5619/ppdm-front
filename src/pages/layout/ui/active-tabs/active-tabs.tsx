@@ -15,7 +15,6 @@ export function ActiveTabs(props: ActiveTabsProps) {
     navigate(activeMenus.currentPath)
   }, [navigate, activeMenus.currentPath])
 
-  console.log('Header', activeMenus.menus)
   return (
     <Wrapper display={props.display}>
       {activeMenus.menus.map((m) => {

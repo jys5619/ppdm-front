@@ -15,7 +15,6 @@ interface SelectProps extends ControlProps {
 }
 
 export const Select = ({ showAll, typeList, onChange, ...rest }: SelectProps) => {
-  console.log(rest.control)
   return (
     <Controller
       name={rest.name}
