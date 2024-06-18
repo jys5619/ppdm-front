@@ -1,25 +1,25 @@
-import { activeInactiveStateList } from "@/shared/vo/state";
-import { useQueryFormListWidgetAction } from "./segments/query-form-list-widget.action";
-import { QueryFormListWidgetProps } from "./segments/query-form-list-widget.prop";
-import { Input, Select } from "@/shared/controlls";
-import { formClass } from "./segments/query-form-list-widget.css";
+import { useQueryFormListWidgetAction } from './segments/query-form-list-widget.action'
+import { QueryFormListWidgetProps } from './segments/query-form-list-widget.prop'
+import { Button, ButtonGroup, Form } from '@/shared/controlls'
+import { useQueryFormListWidgetForm } from './query-form-list-widget-form'
 
 export function QueryFormListWidget(props: QueryFormListWidgetProps) {
-  const { control, form, onSubmit, dataList } = useQueryFormListWidgetAction(props);
+  const { control, form, onSearch, dataList } = useQueryFormListWidgetAction(props)
+  const search = form.watch()
+
+  const formCols = useQueryFormListWidgetForm(control)
 
   return (
     <>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={formClass}>
-        <Input name="title" control={control} type="text" />
-        <Select
-          name={"state"}
-          control={control}
-          typeList={activeInactiveStateList}
-          showAll={true}
-        />
-        <button type="submit">조회</button>
-      </form>
-      <table style={{ border: "1px solid black", width: "100%" }}>
+      <Form rows={formCols} />
+      <ButtonGroup
+        right={[
+          <Button type="button" onClick={() => onSearch(search)}>
+            조회
+          </Button>,
+        ]}
+      />
+      <table style={{ border: '1px solid black', width: '100%' }}>
         <thead>
           <tr>
             <th>1</th>
@@ -29,7 +29,7 @@ export function QueryFormListWidget(props: QueryFormListWidgetProps) {
           </tr>
         </thead>
         <tbody>
-          {dataList.map(data => {
+          {dataList.map((data) => {
             return (
               <tr key={data.id}>
                 <td>
@@ -39,10 +39,10 @@ export function QueryFormListWidget(props: QueryFormListWidgetProps) {
                 <td>{data.favorites}</td>
                 <td>{data.state}</td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </>
-  );
+  )
 }

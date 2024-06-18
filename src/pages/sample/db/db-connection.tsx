@@ -1,3 +1,4 @@
+import { PageWrapper } from '@/shared/controlls'
 import { DatabaseVo } from '@/shared/vo/data'
 import { ActiveInactiveState } from '@/shared/vo/state'
 import { DbType } from '@/shared/vo/type'
@@ -17,11 +18,8 @@ export function DBConnection() {
     state: ActiveInactiveState.Active,
   }
   return (
-    <div>
-      <h2>DB Connection Sample</h2>
-      <hr />
-
-      <DatabaseCreateWidget title="데이터베이스 연결 테스트" database={databaseVo} />
-    </div>
+    <PageWrapper title="데이터베이스 연결 테스트">
+      <DatabaseCreateWidget database={databaseVo} />
+    </PageWrapper>
   )
 }
