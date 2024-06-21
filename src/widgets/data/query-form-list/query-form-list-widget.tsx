@@ -2,12 +2,21 @@ import { useQueryFormListWidgetAction } from './segments/query-form-list-widget.
 import { QueryFormListWidgetProps } from './segments/query-form-list-widget.prop'
 import { Button, ButtonGroup, Form } from '@/shared/controlls'
 import { useQueryFormListWidgetForm } from './query-form-list-widget-form'
+import { useMemo } from 'react'
+import { ColDef } from 'ag-grid-community'
+import { AgGridReact } from 'ag-grid-react'
+import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
+import 'ag-grid-community/styles/ag-theme-quartz.css' // Optional Theme applied to the grid
 
 export function QueryFormListWidget(props: QueryFormListWidgetProps) {
   const { control, form, onSearch, dataList } = useQueryFormListWidgetAction(props)
   const search = form.watch()
 
   const formCols = useQueryFormListWidgetForm(control)
+
+  const colDefs = useMemo<ColDef[]>(() => {
+    return [{ field: 'id' }, { field: 'title' }, { field: 'favorites' }, { field: 'state' }]
+  }, [])
 
   return (
     <>
@@ -19,7 +28,10 @@ export function QueryFormListWidget(props: QueryFormListWidgetProps) {
           </Button>,
         ]}
       />
-      <table style={{ border: '1px solid black', width: '100%' }}>
+      <div className="ag-theme-alpine" style={{ height: 400 }}>
+        <AgGridReact rowData={dataList} columnDefs={colDefs} defaultColDef={{ filter: true }} />
+      </div>
+      {/* <table style={{ border: '1px solid black', width: '100%' }}>
         <thead>
           <tr>
             <th>1</th>
@@ -42,7 +54,7 @@ export function QueryFormListWidget(props: QueryFormListWidgetProps) {
             )
           })}
         </tbody>
-      </table>
+      </table> */}
     </>
   )
 }
