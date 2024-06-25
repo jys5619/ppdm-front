@@ -1,13 +1,11 @@
-import { SubmitHandler } from 'react-hook-form'
-import { QueryFormListWidgetProps } from './query-form-list-widget.prop'
-import { QueryFormListFormFields, useQueryFormListWidgetForm } from './query-form-list-widget.form'
+import { SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { QueryFormListFormFields } from './query-form-list-widget.form'
 import { useState } from 'react'
 import { QueryFormVo } from '@/shared/vo/data'
 import { AxiosError } from 'axios'
 import { QueryFormListSearchVo, getQueryFormList } from '@/shared/api/data'
 
-export function useQueryFormListWidgetAction(props: QueryFormListWidgetProps) {
-  const { control, form } = useQueryFormListWidgetForm(props)
+export function useQueryFormListWidgetAction(form: UseFormReturn<QueryFormListFormFields>) {
   const [dataList, setDataList] = useState<QueryFormVo[]>([])
 
   const onSearch: SubmitHandler<QueryFormListFormFields> = async (
@@ -28,8 +26,6 @@ export function useQueryFormListWidgetAction(props: QueryFormListWidgetProps) {
   }
 
   return {
-    control,
-    form,
     dataList,
     onSearch,
   }

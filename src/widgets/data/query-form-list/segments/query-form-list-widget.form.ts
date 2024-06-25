@@ -12,7 +12,7 @@ const schema = z.object({
 export type QueryFormListFormFields = z.infer<typeof schema>
 
 export function useQueryFormListWidgetForm(props: QueryFormListWidgetProps) {
-  const { control, ...form } = useForm<QueryFormListFormFields>({
+  const form = useForm<QueryFormListFormFields>({
     defaultValues: {
       title: props.searchVo?.title,
       state: props.searchVo?.state,
@@ -21,7 +21,6 @@ export function useQueryFormListWidgetForm(props: QueryFormListWidgetProps) {
   })
 
   return {
-    control,
     form,
   }
 }

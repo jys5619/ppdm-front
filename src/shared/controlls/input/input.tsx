@@ -1,39 +1,24 @@
-import { Controller } from 'react-hook-form'
-import { ControlProps } from '../common'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 import styled from 'styled-components'
+import { InputHTMLAttributes } from 'react'
 
-interface InputProps extends ControlProps {
-  type?: string
-  placeholder?: string
-  disabled?: boolean
-  readOnly?: boolean
+interface InputProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'defaultValue'> {
+  control: Control<TFieldValues>
+  name: TName
 }
 
-export const Input = ({
-  control,
-  name,
-  placeholder,
-  type = 'text',
-  disabled = false,
-  readOnly = false,
-}: InputProps) => {
+export const Input = ({ control, name, ...rest }: InputProps) => {
   return (
     <Controller
-      name={name}
       control={control}
-      render={({ field, fieldState }) => (
+      name={name}
+      render={({ field, fieldState: { error } }) => (
         <>
-          <InputControl
-            {...field}
-            type={type}
-            className={fieldState.invalid ? 'error' : ''}
-            disabled={disabled}
-            readOnly={readOnly}
-            placeholder={placeholder}
-          />
-          {fieldState.invalid && fieldState.error?.message && (
-            <small>{fieldState.error?.message}</small>
-          )}
+          <InputControl {...field} {...rest} />
+          {error && <span>{error.message}</span>}
         </>
       )}
     />

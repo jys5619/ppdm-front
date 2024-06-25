@@ -1,18 +1,18 @@
 import { useQueryFormListWidgetAction } from './segments/query-form-list-widget.action'
 import { QueryFormListWidgetProps } from './segments/query-form-list-widget.prop'
-import { Button, ButtonGroup, Form } from '@/shared/controlls'
-import { useQueryFormListWidgetForm } from './query-form-list-widget-form'
+import { Button, ButtonGroup } from '@/shared/controlls'
+import { QueryFormListWidgetForm } from './query-form-list-widget-form'
 import { useMemo } from 'react'
 import { ColDef } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react'
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css' // Optional Theme applied to the grid
+import { useQueryFormListWidgetForm } from './segments/query-form-list-widget.form'
 
 export function QueryFormListWidget(props: QueryFormListWidgetProps) {
-  const { control, form, onSearch, dataList } = useQueryFormListWidgetAction(props)
+  const { form } = useQueryFormListWidgetForm(props)
+  const { onSearch, dataList } = useQueryFormListWidgetAction(form)
   const search = form.watch()
-
-  const formCols = useQueryFormListWidgetForm(control)
 
   const colDefs = useMemo<ColDef[]>(() => {
     return [{ field: 'id' }, { field: 'title' }, { field: 'favorites' }, { field: 'state' }]
@@ -20,7 +20,19 @@ export function QueryFormListWidget(props: QueryFormListWidgetProps) {
 
   return (
     <>
-      <Form rows={formCols} />
+      {/* <form>
+        <label>
+          Title
+          <Input name="title" control={form.control} type="text" />
+        </label>
+        <label>
+          상태
+          <Select name="state" control={form.control} typeList={activeInactiveStateList} />
+        </label>
+      </form> */}
+      {/* <Form rows={formCols} /> */}
+      <QueryFormListWidgetForm control={form.control} name="form" />
+
       <ButtonGroup
         right={[
           <Button type="button" onClick={() => onSearch(search)}>

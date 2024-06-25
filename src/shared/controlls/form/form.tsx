@@ -1,11 +1,10 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 
 export interface FormCol {
   label: string
   node: ReactNode
-  key?: string
 }
 
 interface FormPorps {
@@ -32,8 +31,6 @@ export function Form({ rows }: FormPorps) {
     </Table>
   )
 }
-
-React.memo(Form)
 
 const Table = styled.form`
   border-top: 1px solid ${(props) => props.theme.colors.colorDarkGray};
