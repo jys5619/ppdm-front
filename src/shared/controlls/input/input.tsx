@@ -6,7 +6,8 @@ interface InputProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'defaultValue'> {
-  control: Control<TFieldValues>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<TFieldValues> | any
   name: TName
 }
 

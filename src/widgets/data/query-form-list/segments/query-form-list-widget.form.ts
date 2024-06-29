@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 import { QueryFormListWidgetProps } from './query-form-list-widget.prop'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,6 +17,7 @@ export function useQueryFormListWidgetForm(props: QueryFormListWidgetProps) {
       title: props.searchVo?.title,
       state: props.searchVo?.state,
     },
+    mode: 'onSubmit',
     resolver: zodResolver(schema),
   })
 
@@ -24,3 +25,5 @@ export function useQueryFormListWidgetForm(props: QueryFormListWidgetProps) {
     form,
   }
 }
+
+export const useQueryFormListSearchContext = () => useFormContext<QueryFormListFormFields>()

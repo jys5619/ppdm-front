@@ -51,11 +51,7 @@ const schema = z.object({
 export type QueryFormEditFormFields = z.infer<typeof schema>
 
 export function useQueryFormEditWidgetForm() {
-  const {
-    control,
-    formState: { errors },
-    ...form
-  } = useForm<QueryFormEditFormFields>({
+  const form = useForm<QueryFormEditFormFields>({
     // defaultValues: {
     //   id: props.queryFormVo?.id,
     //   title: props.queryFormVo?.title,
@@ -69,18 +65,16 @@ export function useQueryFormEditWidgetForm() {
   })
 
   const inputList = useFieldArray({
-    control,
+    control: form.control,
     name: 'inputList',
   })
 
   const sqlList = useFieldArray({
-    control,
+    control: form.control,
     name: 'sqlList',
   })
 
   return {
-    control,
-    errors,
     form,
     inputList,
     sqlList,
