@@ -1,15 +1,15 @@
 import { ReactNode } from 'react'
 import { styled } from 'styled-components'
 
-interface PageWrapperProps {
-  title: string
+interface SectionWrapperProps {
+  title?: string
   children: ReactNode
 }
 
-export function PageWrapper({ title, children }: PageWrapperProps) {
+export function SectionWrapper({ title, children }: SectionWrapperProps) {
   return (
     <Wrapper>
-      <Title>{title}</Title>
+      {title && <Title>{title}</Title>}
       {children}
     </Wrapper>
   )
@@ -17,6 +17,6 @@ export function PageWrapper({ title, children }: PageWrapperProps) {
 
 const Wrapper = styled.div``
 const Title = styled.div`
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   padding: 0 0 1rem 0.5rem;
 `

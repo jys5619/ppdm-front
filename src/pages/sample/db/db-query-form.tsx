@@ -1,6 +1,6 @@
 import { PageWrapper } from '@/shared/controlls'
 import { QueryFormEditWidget } from '@widgets/data/query-form-edit'
-import { QueryFormListWidget } from '@widgets/data/query-form-list/query-form-list-widget'
+import { QueryFormListWidget } from '@widgets/data/query-form-list/QueryFormListWidget'
 import { QueryFormRunWidget } from '@widgets/data/query-form-run'
 import { useState } from 'react'
 

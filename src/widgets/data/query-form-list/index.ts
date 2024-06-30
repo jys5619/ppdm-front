@@ -1,3 +1,3 @@
-import { QueryFormListWidget } from './query-form-list-widget'
+import { QueryFormListWidget } from './QueryFormListWidget'
 
 export { QueryFormListWidget }

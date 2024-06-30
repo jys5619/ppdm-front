@@ -1,7 +1,7 @@
-import { useForm, useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { QueryFormListWidgetProps } from './query-form-list-widget.prop'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { QueryFormListWidgetProps } from '../QueryFormListWidgetProps'
 import { ActiveInactiveState } from '@/shared/vo/state'
 
 const schema = z.object({
@@ -25,5 +25,3 @@ export function useQueryFormListWidgetForm(props: QueryFormListWidgetProps) {
     form,
   }
 }
-
-export const useQueryFormListSearchContext = () => useFormContext<QueryFormListFormFields>()

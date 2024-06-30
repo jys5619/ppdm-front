@@ -1,38 +1,37 @@
 import { ReactNode } from 'react'
-import uuid from 'react-uuid'
-import styled from 'styled-components'
+import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { styled } from 'styled-components'
 
-export interface FormCol {
-  label: string
-  node: ReactNode
-}
-
-interface FormPorps {
-  rows: FormCol[][]
-}
-
-export function Form({ rows }: FormPorps) {
+export const Form = ({
+  form,
+  columns,
+  onSubmit,
+  children,
+}: {
+  form: UseFormReturn<FieldValues>
+  columns: ReactNode[][]
+  onSubmit: SubmitHandler<FieldValues>
+  children: ReactNode
+}) => {
   return (
-    <Table>
-      {rows.map((cols, index) => {
-        return (
-          <Row key={index}>
-            {cols.map((col) => {
-              return (
-                <Col key={uuid()}>
-                  <Label>{col.label}</Label>
-                  <Control>{col.node}</Control>
-                </Col>
-              )
-            })}
-          </Row>
-        )
-      })}
-    </Table>
+    <FormProvider {...form}>
+      <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
+        {columns.map((fields: ReactNode[], rowIndex: number) => {
+          return (
+            <Row key={rowIndex}>
+              {fields.map((col: ReactNode, colIndex: number) => {
+                return <Col key={colIndex}>{col}</Col>
+              })}
+            </Row>
+          )
+        })}
+        {children}
+      </FormWrapper>
+    </FormProvider>
   )
 }
 
-const Table = styled.form`
+const FormWrapper = styled.form`
   border-top: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
@@ -51,17 +50,4 @@ const Col = styled.div`
   flex-grow: 1;
   border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   display: flex;
-`
-
-const Label = styled.div`
-  padding: 0.6rem;
-  width: 20rem;
-  border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
-`
-
-const Control = styled.div`
-  flex-grow: 1;
-  display: flex;
-  justify-items: center;
-  padding: 0.3rem;
 `
