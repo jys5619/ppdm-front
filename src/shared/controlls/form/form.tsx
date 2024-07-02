@@ -33,21 +33,25 @@ export const Form = ({
 
 const FormWrapper = styled.form`
   border-top: 1px solid ${(props) => props.theme.colors.colorDarkGray};
-  border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
-  border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   width: 100%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  border-radius: 0.3rem;
+  background-color: ${(props) => props.theme.colors.colorControlBackground};
 `
 
 const Row = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.colors.colorDarkGray};
+  border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 2.4rem;
 `
 
 const Col = styled.div`
   flex-grow: 1;
-  border-left: 1px solid ${(props) => props.theme.colors.colorDarkGray};
+  border-right: 1px solid ${(props) => props.theme.colors.colorDarkGray};
   display: flex;
+  justify-content: space-between;
 `

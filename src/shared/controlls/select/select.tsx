@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { ChangeEvent, ReactNode } from 'react'
 import styled from 'styled-components'
 import { ErrorMessage } from '@hookform/error-message'
+import { Control, ControlWrapper, Label } from '../style/style'
 
 export interface OptionType {
   value: string
@@ -48,13 +49,13 @@ export const Select = ({
   }
 
   return (
-    <div>
-      {label ? (
-        <div>
+    <ControlWrapper>
+      {label && (
+        <Label>
           <label htmlFor={id}>{label}</label>
-        </div>
-      ) : null}
-      <div>
+        </Label>
+      )}
+      <Control>
         <SelectControl
           {...register(id)}
           {...rest}
@@ -85,10 +86,10 @@ export const Select = ({
           })}
         </SelectControl>
         {rightComponent ?? null}
-      </div>
+      </Control>
       <ErrorMessage errors={errors} name={id} render={({ message }) => <p>{message}</p>} />
       <div>{helperText && <p>{helperText}</p>}</div>
-    </div>
+    </ControlWrapper>
   )
 }
 

@@ -2,7 +2,7 @@ import { PageWrapper } from '@/shared/controlls'
 import { DatabaseVo } from '@/shared/vo/data'
 import { ActiveInactiveState } from '@/shared/vo/state'
 import { DbType } from '@/shared/vo/type'
-import { DatabaseCreateWidget } from '@widgets/data/database/database-create-widget'
+import { DatabaseCreateWidget } from '@widgets/data/database/DatabaseCreateWidget'
 
 export function DBConnection() {
   const databaseVo: DatabaseVo = {

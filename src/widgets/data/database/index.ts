@@ -1,3 +1,3 @@
-import { DatabaseCreateWidget } from './database-create-widget'
+import { DatabaseCreateWidget } from './DatabaseCreateWidget'
 
 export { DatabaseCreateWidget }

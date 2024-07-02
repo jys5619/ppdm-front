@@ -20,6 +20,7 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-top: 0.6rem;
+  background-color: ${(props) => props.theme.colors.colorControlBackground};
 `
 
 const ButtonLeftWrapper = styled.div`

@@ -1,60 +1,48 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { ReactNode } from 'react'
+import { CSSProperties } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Control, ControlWrapper, Label } from '../style/style'
 import { styled } from 'styled-components'
+import { Control, ControlWrapper, Label } from '../style/style'
 
-type InputProps = {
+type CheckboxProps = {
   id: string
+  checkboxLabel: string
+  align?: 'center' | 'left' | 'right'
   label?: string
-  labelSize?: string
   helperText?: string
   helperClassName?: string
   errorClassName?: string
-  rightComponent?: ReactNode
 } & React.ComponentPropsWithoutRef<'input'>
 
-export function Input({
+export function Checkbox({
   id,
+  checkboxLabel,
   label,
-  labelSize,
   helperText,
-  type = 'text',
-  className,
-  rightComponent,
+  align = 'left',
   ...rest
-}: InputProps) {
+}: CheckboxProps) {
   const {
     register,
     formState: { errors },
   } = useFormContext()
 
-  function getClassName(): string {
-    let result = `w-full px-[12px] h-[50px] rounded-[5px] outline-none text-[16px] ${className}`
-
-    if (rest.readOnly) result += ' ' + 'bg-[#f2f4f7] cursor-not-allowed '
-    else result += ' ' + 'text-[#333] border border-[#e1e2e3] focus:border-blue1'
-
-    return result
+  function getStyle(): CSSProperties {
+    return { width: '100%', textAlign: align }
   }
 
   return (
     <ControlWrapper>
       {label && (
-        <Label size={labelSize}>
+        <Label>
           <label htmlFor={id}>{label}</label>
         </Label>
       )}
       <Control>
-        <InputControl
-          {...register(id)}
-          {...rest}
-          type={type}
-          name={id}
-          id={id}
-          className={getClassName()}
-        />
-        {rightComponent ?? null}
+        <label style={getStyle()}>
+          <InputControl {...register(id)} {...rest} type="checkbox" name={id} id={id} />
+          {checkboxLabel}
+        </label>
       </Control>
       <ErrorMessage errors={errors} name={id} render={({ message }) => <p>{message}</p>} />
       <div>{helperText && <p>{helperText}</p>}</div>

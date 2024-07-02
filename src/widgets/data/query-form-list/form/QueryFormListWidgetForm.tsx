@@ -1,6 +1,6 @@
 import { Input, Select } from '@/shared/controlls'
 import { FieldValues, UseFormReturn } from 'react-hook-form'
-import { Form } from '@/shared/controlls/form/form'
+import { Form } from '@/shared/controlls'
 import { activeInactiveStateList } from '@/shared/vo/state'
 import { QueryFormListFormFields } from './useQueryFormListWidgetForm'
 
